@@ -401,11 +401,6 @@ const sidebars = {
                             id: 'integrations/ai-llm/aws-bedrock-titan',
                             label: 'AWS Bedrock Titan',
                         },
-                        {
-                            type: 'doc',
-                            id: 'integrations/ai-llm/aws-bedrock-llama',
-                            label: 'AWS Bedrock Llama3',
-                        },
                     ],
                 },
                 {
