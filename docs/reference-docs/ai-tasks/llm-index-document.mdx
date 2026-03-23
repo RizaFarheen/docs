@@ -72,7 +72,7 @@ This is the task configuration for an LLM Index Document task.
      "inputParameters": {
        "chunkSize": 200,
        "vectorDB": "Pinecone",
-       "index": "${workflow.input}",
+       "index": "${workflow.input.indexName}",
        "namespace": "docs",
        "embeddingModelProvider": "openAI",
        "embeddingModel": "text-embedding-3-large",
