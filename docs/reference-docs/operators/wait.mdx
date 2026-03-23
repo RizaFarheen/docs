@@ -137,7 +137,7 @@ This example configures a Wait task to pause execution until December 25, 2026, 
 To define the wait time at runtime, add a workflow input parameter:
 
 ```json
-// workflow nputs
+// workflow inputs
 
 "inputParameters": [
   "waitUntil"
@@ -217,7 +217,7 @@ The Wait task can reference that workflow input parameter using `${workflow.inpu
   "taskReferenceName": "wait_ref",
   "type": "WAIT",
   "inputParameters": {
-    "until": "${workflow.input.waitDuration}"
+    "duration": "${workflow.input.waitDuration}"
   }
 }
 ```
