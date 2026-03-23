@@ -75,7 +75,7 @@ This is the task configuration for an LLM Store Embeddings task.
        "namespace": "docs",
        "id": "${workflow.input.id}",
        "embeddingModelProvider": "openAI",
-       "embeddingModel": "chatgpt-4o-latest",
+       "embeddingModel": "text-embedding-3-large",
        "embeddings": "${llm_generate_embeddings_ref.output}",
        "metadata": {
          "SomeKey": "Some-value"
