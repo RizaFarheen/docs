@@ -118,7 +118,7 @@ Next, a [Do While](/reference-docs/operators/do-while) task is used to iterate t
     * If both a literature review and a research gap report are required, the Dynamic Fork will generate two forks to conduct research for both areas in parallel. Likewise, if only one task is required, the Dynamic Fork will generate one fork.
 * Another [Switch](/reference-docs/operators/switch) task and [Set Variable](/reference-docs/operators/set-variable) task combination is used to concatenate each sub-topic’s research findings into a single array, which can be accessed and updated with the previously-declared `lit_reviews` and/or `research_gaps` variables.
 
-Finally, once the research is completed, another [LLM Chat Complete](/reference-docs/ai-tasks/llm-text-complete) task is used to synthesize the sub-topics’ findings into a formatted report that answers the user’s original question. A custom [Worker task](/reference-docs/worker-task) is used to generate a .pdf file that downloads directly to the user’s desktop for convenient access.
+Finally, once the research is completed, another [LLM Chat Complete](/reference-docs/ai-tasks/llm-chat-complete) task is used to synthesize the sub-topics’ findings into a formatted report that answers the user’s original question. A custom [Worker task](/reference-docs/worker-task) is used to generate a .pdf file that downloads directly to the user’s desktop for convenient access.
 
 
 ### Step 2: Configure AI/LLM models

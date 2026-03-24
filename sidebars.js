@@ -110,7 +110,7 @@ const sidebars = {
                                 'developer-guides/write-workflows-using-code',
                                 {
                                     type: 'doc',
-                                    id: 'developer-guides/build-workflows-using-conducor-ui',
+                                    id: 'developer-guides/build-workflows-using-conductor-ui',
                                     label: "Build Workflows Using UI"
                                 },
                                 'developer-guides/convert-bpmn-to-workflows',
