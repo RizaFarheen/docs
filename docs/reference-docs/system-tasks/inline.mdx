@@ -21,9 +21,24 @@ Configure these parameters for the Inline task.
 | inputParameters. **evaluatorType** | The type of evaluator used. Supported types:<ul><li>`graaljs` - Evaluates the JavaScript expression and computes the value.</li></ul> | Required.          |
 | inputParameters                    | The parameters for evaluating the script. Any property can be accessed as `$.value` for the expression to evaluate.                   | Required.          |
 
-:::info Note
+### Variable access inside expressions
+
+Every key you add to `inputParameters`, other than `expression` and `evaluatorType`, is automatically available inside your JavaScript as a property of the `$` object.
+
+For example, given:
+
+```json
+"inputParameters": {
+  "expression": "...",
+  "evaluatorType": "graaljs",
+  "value1": "${workflow.input.x}",
+  "value2": 42
+}
+```
+
+You can read `$.value1` and `$.value2` inside the expression. This is why custom keys appear at the same indentation level as `expression` and `evaluatorType`—they are input variables, not configuration keys.
+
 If your Inline expression references a workflow secret (such as `${workflow.secrets.<secret-name>}`), the resolved value is masked in the task output. For details on masking behavior, see [Masking Parameters](https://orkes.io/content/developer-guides/masking-parameters#masking-secret-references-and-secret-values).
-:::
 
 The following are generic configuration parameters that can be applied to the task and are not specific to the Inline task.
 
