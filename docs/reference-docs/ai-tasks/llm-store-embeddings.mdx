@@ -76,7 +76,7 @@ This is the task configuration for an LLM Store Embeddings task.
        "id": "${workflow.input.id}",
        "embeddingModelProvider": "openAI",
        "embeddingModel": "text-embedding-3-large",
-       "embeddings": "${llm_generate_embeddings_ref.output}",
+       "embeddings": "${llm_generate_embeddings_ref.output.result}",
        "metadata": {
          "SomeKey": "Some-value"
        }

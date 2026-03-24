@@ -27,7 +27,7 @@ Configure these parameters for the LLM Search Index task.
 | Parameter | Description | Required/ Optional | 
 | --------- | ----------- | ----------------- |
 | inputParameters.**vectorDB** | The vector database to retrieve the data.<br/><br/>**Note**: If you haven’t configured the vector database on your Orkes Conductor cluster, navigate to the **Integrations** tab and [configure your required provider](/category/integrations/vector-databases). | Required. | 
-| inputParameters.**index** | The index in your vector database where the text or data will be stored.<br/><br/>The terminology of the index field varies depending on the integration:<ul><li>For Weaviate, the index field indicates the collection name.</li><li>For other integrations, it denotes the index name.</li></ul> | Required. |
+| inputParameters.**index** | The index in your vector database to search for relevant embeddings.<br/><br/>The terminology of the index field varies depending on the integration:<ul><li>For Weaviate, the index field indicates the collection name.</li><li>For other integrations, it denotes the index name.</li></ul> | Required. |
 | inputParameters.**namespace** | Namespaces are separate isolated environments within the database to manage and organize vector data effectively. Enter the namespace the task will utilize. <br/><br/>The usage and terminology of the namespace field vary depending on the integration:<ul><li>For Pinecone, the namespace field is applicable.</li><li>For Weaviate, the namespace field is not applicable.</li><li>For MongoDB, the namespace field is referred to as “Collection” in MongoDB.</li><li>For Postgres, the namespace field is referred to as “Table” in Postgres.</li></ul> | Required. | 
 | inputParameters.**embeddingModelProvider** | The LLM provider for the embeddings.<br/><br/>**Note**: If you haven’t configured your AI/LLM provider on your Orkes Conductor cluster, navigate to the **Integrations** tab and [configure your required provider](/category/integrations/ai-llm). | Required. |
 | inputParameters.**embeddingModel** | The embedding model provided by the selected LLM provider. | Required. |
@@ -75,7 +75,7 @@ This is the task configuration for an LLM Search Index task.
        "embeddingModelProvider": "openAI",
        "embeddingModel": "text-embedding-3-large",
        "query": "${workflow.input.query}",
-       "maxResults": 1000,
+       "maxResults": 10,
        "dimensions": 3024
      },
      "type": "LLM_SEARCH_INDEX"
