@@ -21,6 +21,9 @@ For Weaviate Cloud:
 1. Sign up for [Weaviate Cloud](https://console.weaviate.cloud/dashboard).
 2. [Create a cluster](https://weaviate.io/developers/wcs/quickstart#create-a-weaviate-cluster).
 3. [Create a collection](https://weaviate.io/developers/wcs/tools/collections-tool#create-a-collection) within the cluster.
+
+When creating a collection, set the vector dimension to match the output dimension of your embedding model. Common default values are: OpenAI `text-embedding-3-small`: 1536, `text-embedding-3-large`: 3072, and Cohere `embed-english-v3.0`: 1024. 
+
 :::
 
 **To get the API key and endpoint:**

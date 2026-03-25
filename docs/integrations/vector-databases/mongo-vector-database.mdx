@@ -35,7 +35,7 @@ After obtaining the credentials, add a Mongo Vector Database integration to your
 | Integration name | A name for the integration. |
 | MongoDB Atlas connection string | The MongoDB Atlas connection string, in the format: **mongodb+srv://username:password@cluster0.mongodb.net/** | 
 | Database name | The database name to store and query vector data. | 
-| Embedding dimensions | The number of dimensions in the embeddings. The embedding dimensions often depend on the AI model used to generate the embeddings. |
+| Embedding dimensions | The number of dimensions in the embeddings. The embedding dimensions often depend on the AI model used to generate the embeddings.<br/><br/>Common default values are: OpenAI `text-embedding-3-small`: 1536, `text-embedding-3-large`: 3072, and Cohere `embed-english-v3.0`: 1024. |
 | Distance metric | The distance metric, which is a metric to measure the similarity or distance between vectors. Supported values:<ul><li>Cosine Similarity</li><li>Euclidean Distance</li><li>Dot Product</li></ul> |
 | Number of nearest neighbours | The number of nearest neighbors to be used during the search. | 
 | Description | A description of the integration. |

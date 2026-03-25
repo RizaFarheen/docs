@@ -45,7 +45,7 @@ Create a Pinecone index for the integration.
 <p align="center"><img src="/content/img/create-index.png" alt="Creating Index in PineCone" width="90%" height="auto"></img></p>
 
 4. Enter an index name.
-5. [Configure the index parameters](https://docs.pinecone.io/guides/indexes/create-an-index).
+5. [Configure the index parameters](https://docs.pinecone.io/guides/indexes/create-an-index). The index dimension must match the output dimension of your embedding model. Common default values are: OpenAI `text-embedding-3-small`: 1536, `text-embedding-3-large`: 3072, and Cohere `embed-english-v3.0`: 1024. 
 6. Select **Create index** and note the **Region**, which is the environment. This parameter is required when adding the Pinecone integration to Conductor.
 
 <p align="center"><img src="/content/img/get-environment-name.png" alt="Get environment name from Pinecone console" width="100%" height="auto"></img></p>
