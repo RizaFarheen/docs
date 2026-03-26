@@ -122,6 +122,69 @@ Additionally, an object will be created for each iteration, keyed by its iterati
 
 Each time a task in the do while loop is completed, the output is saved and indexed by the iteration value. This makes it possible for the condition to check the output of a specific task iteration using `$.TaskName[’iteration’]['loopTask']`, replacing `TaskName` with the actual Do While task reference name and `loopTask` with the loop task reference name.
 
+### Passing loop output to downstream tasks
+
+After a Do While task completes, you can reference loop task outputs in downstream tasks using one of the following patterns.
+
+<Tabs>
+<TabItem value="Using Set Variable task (recommended)" label="Using Set Variable task (recommended)">
+
+Use a [Set Variable](/content/reference-docs/operators/set-variable) task inside `loopOver` to explicitly store the value you need as a workflow variable, and then reference it downstream.
+
+**Step 1**:  Add a Set Variable task as the last task in `loopOver`:
+
+```
+//workflow definition
+{
+  "name": "save_result",
+  "taskReferenceName": "save_result_ref",
+  "type": "SET_VARIABLE",
+  "inputParameters": {
+    "myValue": "${loopTaskRef.output.someFieldName}"
+  }
+}
+```
+
+**Step 2**: Reference the variable in any downstream task as `${workflow.variables.myValue}`.
+
+Because Do While executes one iteration at a time, the variable always holds the value written by the last completed iteration when the loop finishes.
+
+This is the recommended pattern for agentic loops where loop task output needs to be passed to tasks after the Do While block.
+
+</TabItem>
+<TabItem value="Using the base task reference name" label="Using the base task reference name">
+
+When a Do While task executes, each loop task's reference name is stored under its base name in the resolution context, without the iteration suffix. For example, `task_ref__1`, `task_ref__2`, and so on are all accessible as `task_ref`. This means a downstream task can reference the last iteration's output directly:
+
+```json
+${task_ref.output.someField}
+```
+
+This works without any additional configuration, but it is implicit that it always reflects the last iteration's value, and there is no indication in the workflow definition that the reference spans a loop.
+
+:::warning
+Do not use the iteration-suffixed form (for example, `${task_ref__1.output.someField}`) outside the loop. This reference does not resolve and returns `null` at runtime without throwing an error.
+:::
+
+</TabItem>
+<TabItem value="Referencing a specific iteration" label="Referencing a specific iteration">
+
+The Do While task stores all iteration outputs in its own output object, keyed by iteration number as strings (`"1"`, `"2"`, `"3"`, and so on). You can reference a specific iteration's output in a downstream task using:
+
+``` 
+${do_while_ref.output['1'].loopTask}
+```
+
+Replace `do_while_ref` with your Do While task's reference name, `1` with the target iteration number, and `loopTask` with the loop task's base reference name.
+
+:::info Note
+ If `keepLastN` is configured, only the last n iterations are retained in the output. References to earlier iterations return `null`.
+:::
+
+</TabItem>
+</Tabs>
+
+
 ## Execution
 
 When a Do While loop is executed, each task in the loop will have its `taskReferenceName` concatenated with \_\_i, with i as the iteration number starting at 1.  If one of the loop tasks fails, the Do While task status will be set as FAILED, and upon retry, the iteration number will restart from 1.
