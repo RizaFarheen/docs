@@ -54,6 +54,14 @@ A deployment of the Orkes Conductor platform that hosts definitions, configurati
 
 In Orkes Conductor, a correlation ID is a unique identifier used to associate related workflow executions. It enables tracing a single transaction or business process across multiple workflows. For example, a correlation ID can link an order processed in a purchase workflow with a corresponding refund handled by a separate refund workflow.
 
+## Cron Expression
+
+A string that defines a recurring schedule using a fixed syntax of time and date fields. In Orkes Conductor, cron expressions are used to configure the Workflow Scheduler to trigger workflows at specified intervals, such as daily, hourly, or on a custom schedule.
+
+## Domain
+
+A label used in Orkes Conductor to route task executions to a specific worker pool. Domains are assigned to workers and referenced when triggering workflows using task-to-domain mapping. In the context of RBAC, domains can also be used as a permission target to control access to task routing configurations.
+
 ## Directed Acyclic Graph (DAG)
 
 A type of graph where its vertices are connected in one direction and without any repeating cycles. All [Conductor workflows are directed acyclic graphs](/content/faqs/directed-acyclic-graph) (DAGs), providing a clear map of the workflow and its progress through different states.
@@ -70,7 +78,7 @@ Event-driven architecture facilitates loose coupling between services and respon
 
 ## Event Handler
 
-A module that either listens for specific events in an event-driven system. This can be a piece of code, as simple as a callback function, or in Conductor, a JSON configuration. As its name implies, the [event handler](/content/developer-guides/event-handler) reacts to specific events and triggers subsequent actions, such as starting a workflow or updating a workflow variable.
+A module that listens for specific events in an event-driven system. This can be a piece of code, as simple as a callback function, or in Conductor, a JSON configuration. As its name implies, the [event handler](/content/developer-guides/event-handler) reacts to specific events and triggers subsequent actions, such as starting a workflow or updating a workflow variable.
 
 ## Gateway
 
@@ -90,7 +98,7 @@ Each JWT is also signed using cryptography to ensure that a third party cannot a
 
 ## JDBC (Java Database Connectivity)
 
-An API that enables connectivity between any database management system (DBMS) like PostgreSQL and Conductor workflows. [JDBC](/content/reference-docs/system-tasks/jdbc) enables applications to easily query, update, add, or delete data.
+A standard Java API for connecting to relational databases such as PostgreSQL. In Orkes Conductor, [JDBC](/content/reference-docs/system-tasks/jdbc) connectivity is used in the JDBC task, which allows workflows to query, insert, update, or delete records in a connected database without custom worker code.
 
 ## LLM (Large Language Model)
 
