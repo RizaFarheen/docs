@@ -75,7 +75,7 @@ Configure the application’s roles and permissions to control what your applica
     3. Toggle the access levels for your selected resource:
         * **Read**: The application will be able to view the resource.
         * **Update**: The application will be able to update the resource. The application must also have the *Metadata API* role to update metadata resources.
-        * **Execute**: The application will be able to execute the resource. The application must also have the *Worker* role to execute resources.
+        * **Execute**: The application will be able to execute the resource. For applications that poll task queues (task workers), the *Worker* role is also required.
         * **Delete**: The application will be able to delete the resource. The application must also have the *Metadata API* role to delete metadata resources.
 
 :::tip
