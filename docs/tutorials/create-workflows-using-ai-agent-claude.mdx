@@ -138,6 +138,37 @@ which conductor-mcp
 4. Quit and restart the Claude application.
 
 </TabItem>
+<TabItem value="Windows" label="Windows">
+
+**To configure the MCP server for Claude:**
+
+1. Open the Claude desktop application.
+2. Go to **Settings** > **Developer** > **Edit Config**.
+
+This creates and opens the configuration file at `%APPDATA%\Claude\claude_desktop_config.json`. Replace its content with the following:
+
+```json
+{
+  "mcpServers": {
+    "conductor": {
+      "command": "conductor-mcp",
+      "args": [
+        "--config",
+        "<ABSOLUTE_PATH_TO_conductor-config.json>"
+      ]
+    }
+  }
+}
+```
+
+Replace `ABSOLUTE_PATH_TO_conductor-config.json` with the config file path saved in [Step 3](/content/tutorials/create-workflows-using-ai-agent-claude#step-3-create-a-config-file-with-conductor-keys). Use double backslashes in the path, for example: `C:\\Users\\YourName\\conductor-config.json`.
+
+3. Save the file.
+4. Quit and restart the Claude application.
+
+If the configuration is correct, Claude starts without errors. You can verify the Conductor MCP server is running from **Settings** > **Developer**.
+
+</TabItem>
 </Tabs>
 
 ## Step 5: Create Conductor workflows with Claude
