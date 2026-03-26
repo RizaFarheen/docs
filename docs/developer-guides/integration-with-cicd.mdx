@@ -86,7 +86,7 @@ You can use pipelines or deployment scripts to push the changes in an automated 
 
 The following script cycles through all the workflow definitions in the current folder and uploads them to the Conductor server.
 
-To use the script, you must inject `ORKES_ACCESS_KEY`, `ORKES_ACCESS_SECRET`, and `ORKES_CONDUCTOR_SERVER_URL` (ending in /api) variables with the appropriate values in your deployment pipeline. Refer to [Authentication](/sdks/authentication) for a guide on retrieving your Orkes access tokens.
+To use the script, you must inject `CONDUCTOR_AUTH_KEY`, `CONDUCTOR_AUTH_KEY`, and `CONDUCTOR_AUTH_SECRET` (ending in /api) variables with the appropriate values in your deployment pipeline. Refer to [Authentication](/sdks/authentication) for a guide on retrieving your Orkes access tokens.
 
 ``` shell
 export response=`curl -s -X POST $CONDUCTOR_SERVER_URL/token -H 'Content-Type:application/json' -d '{

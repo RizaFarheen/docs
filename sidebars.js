@@ -110,7 +110,7 @@ const sidebars = {
                                 'developer-guides/write-workflows-using-code',
                                 {
                                     type: 'doc',
-                                    id: 'developer-guides/build-workflows-using-conducor-ui',
+                                    id: 'developer-guides/build-workflows-using-conductor-ui',
                                     label: "Build Workflows Using UI"
                                 },
                                 'developer-guides/convert-bpmn-to-workflows',
@@ -400,11 +400,6 @@ const sidebars = {
                             type: 'doc',
                             id: 'integrations/ai-llm/aws-bedrock-titan',
                             label: 'AWS Bedrock Titan',
-                        },
-                        {
-                            type: 'doc',
-                            id: 'integrations/ai-llm/aws-bedrock-llama',
-                            label: 'AWS Bedrock Llama3',
                         },
                     ],
                 },

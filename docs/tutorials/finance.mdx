@@ -221,7 +221,7 @@ The workflow uses an LLM Text Complete task in Orkes Conductor to simulate the c
    "payment_history"
  ],
  "integrations": [
-   "<YOUR-LLM-PRIVIDER>:<YOUR-LLM-MODEL>"
+   "<YOUR-LLM-PROVIDER>:<YOUR-LLM-MODEL>"
  ],
  "version": 1
 }
@@ -468,7 +468,7 @@ Now, let’s rerun the workflow for a loan over $10,000. Here’s the updated wo
 }
 ```
 
-This initiates the workflow and takes you to the workflow execution page. Since the loan amount is less than $10,000, it is automatically approved, and the user receives an email via SendGrid.
+This initiates the workflow and takes you to the workflow execution page. Since the loan amount is over $ 10,000, it goes into manual approval.
 
 ### Completing the Human task
 

@@ -264,7 +264,7 @@ With the integrations and prompt ready, let’s create the workflow.
     - In **Prompt template**, replace `<YOUR-LLM-PROMPT>` with your prompt created in [Step 2](/content/tutorials/document-retrieval-workflow#step-2-create-the-ai-prompt).
     - Make sure to update the **promptVariable** as follows:
         - **retrievedContext** - `${search_index_ref.output.result[0].text}`
-        - **queryText** - `${workflow.input.documentUrl}`
+        - **queryText** - `${workflow.input.question}`
 8. Select **Save** > **Confirm**.
 
 ## Step 5: Run the workflow

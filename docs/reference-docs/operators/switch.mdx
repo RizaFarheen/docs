@@ -22,7 +22,7 @@ Configure these parameters for the Switch task.
 | evaluatorType | The type of evaluator used. Supported types: <ul><li>`value-param`—Evaluates a specific input parameter in the Switch task.</li><li>`graaljs`—Evaluates JavaScript expressions and computes the value. Allows you to use ES6-compatible JavaScript.</li></ul>                             | Required.          |
 | expression    | The expression that is evaluated by the Switch task. The expression format depends on the evaluator type:<ul><li>For the `value-param` evaluator, the expression is the input parameter key.</li><li>For the `graaljs` evaluator, the expression is the JavaScript expression. </li></ul> | Required.          |
 | decisionCases | A map of the possible switch cases. The keys are the possible outputs of the evaluated expression, and the values are the list of tasks to be executed in each case.                                                                                                                      | Required.          |
-| defaultCase   | The default branch. Contains the list of tasks to be executed when no matching value is found in the decision cases.                                                                                                                                                                      | Required.          |
+| defaultCase   | The default branch. Contains the list of tasks to be executed when no matching value is found in the decision cases. The default branch. Contains the list of tasks to be executed when no matching value is found in the decision cases. Use `[]` if no fallback is needed.<br/><br/>If `defaultCase` is `[]` and no case matches, the Switch task completes successfully and the workflow continues to the next task without executing any branch tasks. | Required.          |
 
 The following are generic configuration parameters that can be applied to the task and are not specific to the Switch task. 
 
@@ -74,7 +74,7 @@ This is the task configuration for a Switch task.
   },
   "type": "SWITCH",
   "decisionCases": {
-    "apples": [
+    "apple": [
       {// task configuration}
     ],
     "tomatoes":  [

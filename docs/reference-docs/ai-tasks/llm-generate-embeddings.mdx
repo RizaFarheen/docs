@@ -27,7 +27,7 @@ Configure these parameters for the LLM Generate Embeddings task.
 | inputParameters.**llmProvider** | The integration name of the LLM provider integrated with your Conductor cluster.<br/><br/>**Note**: If you haven’t configured your AI/LLM provider on your Orkes Conductor cluster, go to the **Integrations** tab and [configure your required provider](/category/integrations/ai-llm).| Required. | 
 | inputParameters.**model** | The available language models within the selected LLM provider. <br/><br/>For example, If your LLM provider is Azure Open AI and you’ve configured text-davinci-003 as the language model, you can select it here. | Required. | 
 | inputParameters.**text** | The text to be converted and stored as a vector. It can also be [passed as variables](/developer-guides/passing-inputs-to-task-in-conductor). | Required. | 
-| inputParameters.**dimensions** | The size of the vector, which is the number of elements in the vector. | Optional. | 
+| inputParameters.**dimensions** | The number of dimensions in the generated embedding vector. Must match the dimensions supported by the chosen model and your vector database index configuration. For example, for OpenAI `text-embedding-3-large`, the supported values are 256, 1024, or 3072. | Optional. | 
 
 The following are generic configuration parameters that can be applied to the task and are not specific to the LLM Generate Embeddings task.
 
@@ -60,15 +60,15 @@ This is the task configuration for an LLM Generate Embeddings task.
 
 ```json
 {
-     "name": "llm_generate_embeddings",
-     "taskReferenceName": "llm_generate_embeddings_ref",
-     "inputParameters": {
-       "llmProvider": "openAI",
-       "model": "chatgpt-4o-latest",
-       "text": "${workflow.input.text}",
-       "dimensions": 3024
-     },
-     "type": "LLM_GENERATE_EMBEDDINGS"
+  "name": "llm_generate_embeddings",
+  "taskReferenceName": "llm_generate_embeddings_ref",
+  "inputParameters": {
+    "llmProvider": "openAI",
+    "model": "text-embedding-3-large",
+    "text": "${workflow.input.text}",
+    "dimensions": 3072
+  },
+  "type": "LLM_GENERATE_EMBEDDINGS"
 }
 ```
 

@@ -37,9 +37,9 @@ After obtaining the credentials, add a Postgres Vector Database integration to y
 | Postgres Database User | The database username. |
 | Postgres Database Password | The password associated with the database username. |
 | Postgres Database URL |The database URL, which is the JDBC connection string for the postgres database. For example: `jdbc:database://url/databaseName`. | 
-| Embedding dimensions | The number of dimensions in the embeddings. The embedding dimensions often depend on the AI model used to generate the embeddings. | 
+| Embedding dimensions | The number of dimensions in the embeddings. The embedding dimensions often depend on the AI model used to generate the embeddings.<br/><br/>Common default values are: OpenAI `text-embedding-3-small`: 1536, `text-embedding-3-large`: 3072, and Cohere `embed-english-v3.0`: 1024.  | 
 | Distance metric | The distance metric, which is a metric to measure the similarity or distance between vectors. Supported values:<ul><li>Cosine Similarity</li><li>Euclidean Distance</li><li>Inner Product</li></ul> |
-| Indexing method | The indexing method. Supported methods:<ul><li>hnsv (Hierarchical Navigable Small World graphs)</li><li>ivfflat (Inverted File Flat)</li></ul> |
+| Indexing method | The indexing method. Supported methods:<ul><li>hnsw (Hierarchical Navigable Small World graphs)</li><li>ivfflat (Inverted File Flat)</li></ul> |
 | Number of inverted lists to create for ivfflat index | If *ivfflat* is selected as the indexing method, enter the number of inverted lists to create when using this indexing method. |
 | Description | A description of the integration. | 
 

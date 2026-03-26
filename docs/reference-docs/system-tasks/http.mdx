@@ -86,10 +86,10 @@ The HTTP task will return the following parameters.
 | Parameter    | Description                                                                                                                   |
 | ------------ | ----------------------------------------------------------------------------------------------------------------------------- |
 | response     | A JSON object representing the response, if present.                                                                          |
-| headers      | An object containing the metadata about the response.                                                                         |
-| statusCode   | The [HTTP status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) indicating success or failure of the request. |
-| reasonPhrase | The reason phrase associated with the HTTP status code.                                                                       |
-| body         | The response body containing the data returned by the API.                                                                    |
+| response.**headers**      | An object containing the metadata about the response.                                                                         |
+| response.**statusCode**   | The [HTTP status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) indicating success or failure of the request. |
+| response.**reasonPhrase** | The reason phrase associated with the HTTP status code.                                                                       |
+| response.**body**.        | A JSON object containing the data returned by the API.                                                                |
 
 ## Adding an HTTP task in UI
 

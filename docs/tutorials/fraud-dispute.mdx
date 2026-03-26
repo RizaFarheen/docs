@@ -578,7 +578,7 @@ Orkes Conductor lets you define workflows as JSON, through [SDKs](https://orkes.
              "subject": "ABC Bank: Fraud Dispute Submission Incomplete",
              "contentType": "text/plain",
              "content": "Dear Customer,\n\nWe were unable to process your fraud dispute request because some required information appears to be missing or incomplete.\n\nPlease review your submission and ensure all details are provided before resubmitting your request. This will help us process your case as quickly as possible.\n\nBest regards,\nFraud Investigation Team",
-             "sendgridConfiguration": "<YOUR-SENDGRID-UNTEGRATION>"
+             "sendgridConfiguration": "<YOUR-SENDGRID-INTEGRATION>"
            },
            "type": "SENDGRID"
          },
@@ -602,7 +602,7 @@ Orkes Conductor lets you define workflows as JSON, through [SDKs](https://orkes.
      "name": "score_via_llm",
      "taskReferenceName": "score_via_llm",
      "inputParameters": {
-       "llmProvider": "<YOUR-LLM-PRVIDER>",
+       "llmProvider": "<YOUR-LLM-PROVIDER>",
        "model": "<YOUR-LLM-MODEL>",
        "promptName": "fraud_scoring_prompt",
        "promptVariables": {
@@ -774,7 +774,7 @@ Orkes Conductor lets you define workflows as JSON, through [SDKs](https://orkes.
      "name": "notify_sendgrid",
      "taskReferenceName": "notify_sendgrid",
      "inputParameters": {
-       "from": "<YOUR-SENDGRID-VERIFIER-SENDER-EMAIL>",
+       "from": "<YOUR-SENDGRID-VERIFIED-SENDER-EMAIL>",
        "to": "${workflow.input.customerEmail}",
        "subject": "ABC Bank: Your fraud dispute update",
        "contentType": "text/plain",

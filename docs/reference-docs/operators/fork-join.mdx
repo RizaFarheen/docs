@@ -63,6 +63,10 @@ This is the task configuration for a Fork/Join task.
 }
 ```
 
+:::info Note
+A `FORK_JOIN` task must be immediately followed by a `JOIN` task in the `tasks` array. Otherwise, workflow registration will fail.
+:::
+
 ## Task output
 
 The Fork task does not produce output. The Join task returns a map containing the outputs of the tasks listed in `joinOn`, keyed by their task reference names. [Learn more about the Join task output](https://orkes.io/content/reference-docs/operators/join#task-output).

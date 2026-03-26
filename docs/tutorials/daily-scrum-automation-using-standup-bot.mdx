@@ -31,7 +31,7 @@ This tutorial includes two workflows:
 <p align="center"><img src="/content/img/standup-bot-main-workflow.png" alt="Standup bot workflow" width="50%" height="auto"></img></p>
 
 - The **standup_updates_main** workflow begins with a [Fork/Join](https://orkes.io/content/reference-docs/operators/fork-join) task that splits into multiple parallel forks. The number of forks is determined based on the number of users the bot serves.
-- Each fork contains a [Sub Workflow](https://orkes.io/content/docs/reference-docs/sub-workflow-task) task that invokes the **individual_updates** workflow.
+- Each fork contains a [Sub Workflow](https://orkes.io/content/reference-docs/operators/sub-workflow) task that invokes the **individual_updates** workflow.
 - Once the forks are completed, the [Join task](https://orkes.io/content/reference-docs/operators/join) combines all the forks, and the workflow is completed.
 
 **Sub-workflow  logic:**

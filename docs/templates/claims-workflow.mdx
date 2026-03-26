@@ -82,6 +82,8 @@ This section explains the workflow logic and execution flow.
   * If the damages are not covered upon further investigation, the workflow terminates with the reason “Terminated after investigation. Incident not covered”.   
   * If the damages are covered upon further investigation, the workflow terminates with the reason “Send Payment to client”. 
 
+This template is simplified to support Auto policies only. To support additional policy types such as Home or Life, add corresponding cases to the Switch task that evaluates the policy type.
+
 ### Step 2: Set up custom workers
 
 :::info Prerequsites
