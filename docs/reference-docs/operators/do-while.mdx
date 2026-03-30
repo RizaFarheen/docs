@@ -17,11 +17,11 @@ Configure these parameters for the Do While task.
 
 | Parameter                      | Description                                                          | Required/ Optional   |
 | ------------------------------ | ------------------------------------------------------------------------------------------------------- | -------------------- |
-| evaluatorType                  | The type of evaluator used. Supported types: <ul><li>`value-param`—Evaluates a boolean input parameter in the Do While task.</li><li>`graaljs`—Evaluates JavaScript expressions and computes the value. Allows you to use ES6-compatible JavaScript.</li></ul>                                                                    | Required.          |
+| evaluatorType                  | The type of evaluator used. Supported types: <ul><li>`value-param`: Evaluates a boolean input parameter in the Do While task.</li><li>`graaljs`: Evaluates JavaScript expressions and computes the value. Allows you to use ES6-compatible JavaScript.</li></ul>If not specified, defaults to a built-in JavaScript evaluator.                                                                   | Required.          |
 | loopCondition                  | The condition that is evaluated by the Do While task after every iteration. The expression format depends on the evaluator type:<ul><li>For the `value-param` evaluator, the expression is the input parameter key.</li><li>For the `graaljs` evaluator, the expression is in ES6-compatible JavaScript. Refer to [Script expression](#script-expression) for more information. </li></ul> | Required, unless iterating over a list of items.          |
 | loopOver                       | The list of tasks to be executed as long as the condition is true.    | Required.          |
 | inputParameters. **items** | An array of items, which will be iterated over in the loop. The number of iterations is equal to the list size. You can use this to iterate without a condition. <br/><br/> Refer to [Examples](#examples) for more information on how to use the `items` parameter.            | Optional.          |
-| inputParameters. **keepLastN** | The number of iterations of execution data to retain. If enabled, the default value is 2.<br/><br/> Use `keepLastN` if the number of iterations is expected to be large and not all execution data needs to be retained. Refer to the [Execution data](#execution-data) for more information.         | Optional.        |
+| inputParameters. **keepLastN** | The number of iterations of execution data to retain. The minimum value is 2.<br/><br/> Use `keepLastN` if the number of iterations is expected to be large and not all execution data needs to be retained. Refer to the [Execution data](#execution-data) for more information.         | Optional.        |
 
 The following are generic configuration parameters that can be applied to the task and are not specific to the Do While task. 
 
@@ -55,6 +55,15 @@ Or
 
 The function should return a boolean value. To dynamically reference other input parameters in the script, it is recommended to use bracket notation (for example, `$.do_while_ref['iteration']`).
 
+### Referencing task outputs in a Do While task
+
+A Do While task uses two distinct syntaxes depending on context. `inputParameters` values use standard Conductor notation (`${...}`), while `loopCondition` expressions use JavaScript variable binding (`$.`).
+
+| Context | Syntax | Example | 
+| ------- | ------ | ------- |
+| `loopCondition`<br/>(task output) | `$.taskRef['key']` |. `$.do_while_ref['iteration']` | 
+| `inputParameters` | `${taskRef.output.key}` | `${http_ref.output.statusCode}` | 
+| `inputParameters` | `${workflow.variables.key}` | `${workflow.variables.maxIterations}` | 
 
 ## Task configuration
 
@@ -120,7 +129,7 @@ Additionally, an object will be created for each iteration, keyed by its iterati
 
 ### Accessing the Do While task output
 
-Each time a task in the do while loop is completed, the output is saved and indexed by the iteration value. This makes it possible for the condition to check the output of a specific task iteration using `$.TaskName[’iteration’]['loopTask']`, replacing `TaskName` with the actual Do While task reference name and `loopTask` with the loop task reference name.
+Each time a task in the loop is completed, the output is saved and indexed by the iteration value. This makes it possible for the condition to check the output of a specific task iteration using `$.TaskName['1']['loopTask']`, replacing `TaskName` with the actual Do While task reference name, '1' with the target iteration number, and `loopTask` with the loop task reference name.
 
 ### Passing loop output to downstream tasks
 
@@ -189,7 +198,7 @@ Replace `do_while_ref` with your Do While task's reference name, `1` with the ta
 
 When a Do While loop is executed, each task in the loop will have its `taskReferenceName` concatenated with \_\_i, with i as the iteration number starting at 1.  If one of the loop tasks fails, the Do While task status will be set as FAILED, and upon retry, the iteration number will restart from 1.
 
-If an exception occurs during evaluation of the `loopCondition`, the task is set to CANCELED.
+If an exception occurs during evaluation of the `loopCondition`, the task is set to FAILED_WITH_TERMINAL_ERROR.
 
 ### Execution data
 
