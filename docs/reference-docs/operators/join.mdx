@@ -33,31 +33,32 @@ For predictable behavior, tasks referenced by the join script should be marked a
 
 ```shell
 (function(){
-let results = {};
-let pendingJoinsFound = false;
-if($.joinOn){
-  $.joinOn.forEach((element)=>{
-    if($[element] && $[element].status !== 'COMPLETED'){
-      results[element] = $[element].status;
-      pendingJoinsFound = true;
-    }
-  });
-  if(pendingJoinsFound){
-    return {
-      "status":"IN_PROGRESS",
-      "reasonForIncompletion":"Pending",
-      "outputData":{
-        "scriptResults": results
+  let results = {};
+  let pendingJoinsFound = false;
+  // $.joinOn is an array of task reference name strings, as configured in joinOn.
+  // $[element] is the task data object for that reference, containing status and output.
+  if($.joinOn){
+    $.joinOn.forEach((element)=>{
+      if($[element] && $[element].status !== 'COMPLETED'){
+        results[element] = $[element].status;
+        pendingJoinsFound = true;
       }
-    };
+    });
+    if(pendingJoinsFound){
+      return {
+        "status":"IN_PROGRESS",
+        "reasonForIncompletion":"Pending",
+        "outputData":{
+          "scriptResults": results
+        }
+      };
+    }
+    return true;
   }
-  // To complete the Join - return true OR an object with status = 'COMPLETED' like above.
-  return true;
-}
 })();
 ```
 
-In the example script, there is a variable called `$.joinOn`, which is an array containing the task references and output data of each joined task. The script is designed to check if the status of the tasks to be joined is COMPLETED.  If any pending joins are found, the script changes the status of the pending join tasks to the required status (IN_PROGRESS in the example script). The example script can be modified to suit your use case.
+In the example script, `$.joinOn` is an array of task reference name strings, matching the `joinOn` configuration. For each reference name, `$[element]` provides the corresponding task data object, including its status and output. The script is designed to check if the status of the tasks to be joined is COMPLETED.  If any pending joins are found, the script changes the status of the pending join tasks to the required status (IN_PROGRESS in the example script). The example script can be modified to suit your use case.
 
 The following are generic configuration parameters that can be applied to the task and are not specific to the Join task.
 
