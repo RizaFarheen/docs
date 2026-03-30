@@ -170,6 +170,38 @@ The variable can be referenced in the same workflow using the following expressi
 }
 ```
 
+For example, the following workflow sets a variable in the first task and reads it in the second task.
+
+```json
+{
+  "name": "set_and_read_variable_example",
+  "version": 1,
+  "schemaVersion": 2,
+  "tasks": [
+    {
+      "name": "set_user",
+      "taskReferenceName": "set_user_ref",
+      "type": "SET_VARIABLE",
+      "inputParameters": {
+        "name": "Orkes"
+      }
+    },
+    {
+      "name": "read_user",
+      "taskReferenceName": "read_user_ref",
+      "type": "INLINE",
+      "inputParameters": {
+        "evaluatorType": "graaljs",
+        "expression": "(function(){ return { greeting: 'Hello, ' + $.name }; })()",
+        "name": "${workflow.variables.name}"
+      }
+    }
+  ]
+}
+```
+
+At runtime, `${workflow.variables.name}` in `read_user_ref` resolves to "Orkes", and the task outputs `{ "greeting": "Hello, Orkes" }`.
+
 :::note
 Workflow variables cannot be re-referenced across workflows, even between a parent workflow and a sub-workflow.
 :::
