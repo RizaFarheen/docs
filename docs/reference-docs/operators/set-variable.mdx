@@ -23,10 +23,6 @@ Configure these parameters for the Set Variable task.
 
 Once a variable is initialized, it can be accessed in any subsequent task using the expression `${workflow.variables.variableName}`.
 
-:::info Note
-The scope of the Set Variable task is limited to its workflow. An initialized variable in one workflow will not carry over to another workflow or sub-workflow and will have to be initialized again using a new Set Variable task. In some cases, you can consider setting up [global environment variables](https://orkes.io/content/developer-guides/using-environment-variables) to manage frequently accessed variables across workflows.
-:::
-
 The following are generic configuration parameters that can be applied to the task and are not specific to the Set Variable task.
 
 <details>
@@ -66,6 +62,16 @@ This is the task configuration for a Set Variable task.
    - **Value**—The variable value, which can be a [dynamic input](/content/developer-guides/passing-inputs-to-task-in-conductor) (for example, `${workflow.input.someKey}`) or a fixed value.
 
 <p><img src="/content/img/ui-guide-set-variable.png" alt="Screenshot of Set Variable Task in Orkes Conductor"/></p>
+
+## Use cases
+
+**Passing Do While loop output to downstream tasks**
+
+Use a Set Variable task inside a Do While loop to make loop output available to tasks after the loop completes. Task outputs inside a loop are stored with iteration-suffixed references (for example, `loopTaskRef__1.output.result`), which return null when referenced outside the loop. Storing the value as a workflow variable using Set Variable is the required workaround. For more information, see [Do While](/content/reference-docs/operators/do-while#passing-loop-output-to-downstream-tasks) task.
+
+**Sharing variables across workflows**
+
+The scope of the Set Variable task is limited to its workflow. An initialized variable in one workflow will not carry over to another workflow or sub-workflow and will have to be initialized again using a new Set Variable task. In some cases, you can consider setting up [global environment variables](https://orkes.io/content/developer-guides/using-environment-variables) to manage frequently accessed variables across workflows.
 
 ## Examples
 
