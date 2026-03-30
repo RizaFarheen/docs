@@ -112,7 +112,46 @@ This is the task configuration for a Wait for Webhook task.
 
 ## Task output
 
-During execution, the task processes incoming webhook events based on the configured criteria. The task will return parameters based on the specific event payload received, including the event identifier, event type, and event data containing relevant details.
+The Wait for Webhook task returns the incoming webhook event payload as its output. The exact fields depend on the payload sent by the webhook source.
+
+For example, if the incoming webhook payload is:
+
+```json
+{
+  "data": {
+    "recipientId": "2",
+    "message": "Hello"
+  },
+  "event": {
+    "type": "message"
+  }
+}
+```
+
+The task output will be:
+
+```json
+{
+  "data": {
+    "recipientId": "2",
+    "message": "Hello"
+  },
+  "event": {
+    "type": "message"
+  }
+}
+```
+
+To reference these fields in downstream tasks, use the task reference name with standard dot-notation:
+
+```json
+{
+  "recipientId": "${webhook_ref.output.data.recipientId}",
+  "messageType": "${webhook_ref.output.event.type}"
+}
+```
+
+Replace `webhook_ref` with your task's reference name and adjust the field path to match your payload structure.
 
 ## Adding a Wait for Webhook task in UI
 
