@@ -150,3 +150,43 @@ Once the issues regarding the workflow failure are resolved, you can retry the f
 | Retry - from failed task          | Retry the workflow from its last failed task.                  |
 | Re-run workflow                   | Run a new workflow execution instance with updated workflow input parameters, idempotency key, correlation ID, and task-to-domain mapping.                  |     
 | Retry - resume subworkflow        | (Only if the workflow contains a sub-workflow) Retry the parent workflow from the sub-workflow’s last failed task.                                                 |  
+
+## Common failure patterns
+
+### Task stuck in SCHEDULED state
+
+**Issue**: A task remains in `SCHEDULED` state and does not get picked up by a worker.
+
+**Fix**: Check the following in order:
+
+1. **Task type name mismatch**: The task type in the workflow definition must exactly match the queue name the worker polls. A mismatch leaves the task unclaimed.
+2. **Worker not running or not polling**: Check worker logs to confirm the worker is active and polling.
+3. **Task domain mismatch**: If the worker polls a specific domain, the task must be scheduled to that same domain. Check the task-to-domain mapping in the execution's **Task-to-domain** tab.
+4. **Missing task definition**: The task type must have a definition registered in metadata. Verify under **Definitions** > **Task**.
+5. **`pollTimeoutSeconds` too low**: If tasks are reaching `TIMED_OUT`, review the `pollTimeoutSeconds` value in the task definition. When this threshold is exceeded, the task moves to `TIMED_OUT` and the configured `timeoutPolicy` applies.
+
+### Task keeps failing
+
+**Issue**: A task repeatedly reaches `FAILED` or `TIMED_OUT` state.
+
+**Fix**: Retrieve the `reasonForIncompletion` field, which captures the exception or timeout message set by the system.
+
+    - To read it from the workflow, call [`GET /api/workflow/{workflowId}`](/content/reference-docs/api/workflow/get-workflow-by-id). Each task object in the `tasks` array includes its own `reasonForIncompletion`.
+    - If you have the task ID directly, call [`GET /api/tasks/{taskId}`](/content/reference-docs/api/task/get-task) to retrieve the field from the task object.
+
+Cross-reference the message with worker logs. The **Worker** field in the task's **Summary** tab identifies the specific worker instance that polled the task, which helps locate the relevant log output outside of Conductor.
+
+The **Logs** tab in the task detail panel also displays any logs the worker explicitly attached to the task result.
+
+### Workflow hangs
+
+**Issue**: A workflow stays in `RUNNING` indefinitely with no task activity.
+
+**Fix**: Check whether the workflow contains a Wait task. A Wait task in progress shows as `IN_PROGRESS`. The workflow resumes only when the task is explicitly completed.
+
+**Ways to unblock a Wait task:**
+
+- **Async signal**: Send [`POST /api/tasks/{workflowId}/{status}/signal`](/content/reference-docs/api/task/signal-running-task-asynchronously) with the output map in the request body. 
+- **Sync signal**: Send [`POST /api/tasks/{workflowId}/{status}/signal/sync`](/content/reference-docs/api/task/signal-running-task-synchronously). 
+
+If no Wait task is present, check for a missing event that an event handler or external system was expected to deliver.

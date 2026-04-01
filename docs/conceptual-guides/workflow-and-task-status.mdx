@@ -16,7 +16,7 @@ Once started, a workflow execution will either be in an ongoing or terminal stat
 | RUNNING | The workflow is in progress. |
 | PAUSED | The workflow is paused by a user or an external event and is awaiting a manual action to resume. |
 | COMPLETED | Terminal status where all the tasks in the workflow are completed. |
-| TIMED_OUT | Terminal status where one of the workflow tasks has timed out. |
+| TIMED_OUT | Terminal status where the workflow's configured `timeoutSeconds` has elapsed, or a task with `timeoutPolicy: TIME_OUT_WF` has timed out. |
 | TERMINATED | Terminal status where an incomplete workflow has been terminated by a user, event, or another workflow. |
 | FAILED | Terminal status where the workflow has encountered an error and failed. You can [retry the workflow execution from the failed task](debugging-workflows#recovering-from-failures). |
 

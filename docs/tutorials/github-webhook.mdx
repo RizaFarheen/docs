@@ -5,7 +5,7 @@ description: "Learn how to trigger workflows from GitHub pull request events and
 
 # Build a GitHub Pull Request Reviewer Assignment Workflow
 
-This tutorial explains how to automate pull request (PR) reviewer assignment using GitHub webhooks and Orkes Conductor. When a new PR is opened, GitHub sends an event to Conductor, which then assigns the appropriate reviewer through the GitHub API.
+This tutorial explains how to automate pull request (PR) reviewer assignment using GitHub webhooks and Orkes Conductor. When a new PR is opened, GitHub sends an event to Conductor, which starts a workflow execution that assigns the appropriate reviewer through the GitHub API.
 
 While GitHub Marketplace offers handy plugins, such as [auto-assign reviewer by files](https://github.com/marketplace/actions/auto-assign-reviewer-by-files), they come with limitations: rigid logic, minimal observability, and a lack of ownership. Owning your automation with an orchestration platform like Orkes Conductor means you’re in control: you write the logic, observe every task, and extend workflows to any system your team uses, from Slack to Jira to custom APIs.
 
@@ -20,7 +20,7 @@ Here’s an overview of the system we are going to build:
 3. Store the GitHub token as a secret in Conductor.
 4. Create a webhook in Conductor.
 5. Configure a webhook in GitHub.
-6. Modify and run the workflow.
+6. Modify the workflow.
 7. Submit a PR in the GitHub repository.
 
 Follow the tutorial using the free [Orkes Developer Edition](https://developer.orkescloud.com/). Sign up for an account to get started.
@@ -39,42 +39,55 @@ In this tutorial, we will create the workflow using Conductor UI.
 
 ```json
 {
- "name": "github_pr_reviewer_assignment",
- "description": "Assign reviewers when a PR is opened",
- "version": 1,
- "tasks": [
-   {
-     "name": "wait_for_pr_open",
-     "taskReferenceName": "waitForPR",
-     "inputParameters": {
-       "matches": {
-         "$['action']": "opened"
-       }
-     },
-     "type": "WAIT_FOR_WEBHOOK"
-   },
-   {
-     "name": "assign_reviewers",
-     "taskReferenceName": "assignReviewers",
-     "inputParameters": {
-       "http_request": {
-         "method": "POST",
-         "uri": "${waitForPR.output.pull_request.url}/requested_reviewers",
-         "headers": {
-           "Authorization": "token ${workflow.secrets.ghp_your_github_token}",
-           "Accept": "application/vnd.github.v3+json"
-         },
-         "body": {
-           "reviewers": [
-             "<GITHUB-ID>"
-           ]
-         }
-       }
-     },
-     "type": "HTTP"
-   }
- ],
- "schemaVersion": 2
+  "name": "github_pr_reviewer_assignment",
+  "description": "Assign reviewers when a PR is opened",
+  "version": 1,
+  "tasks": [
+    {
+      "name": "check_pr_action",
+      "taskReferenceName": "checkAction",
+      "type": "SWITCH",
+      "evaluatorType": "value-param",
+      "expression": "action",
+      "inputParameters": {
+        "action": "${workflow.input.action}"
+      },
+      "decisionCases": {
+        "opened": [
+          {
+            "name": "assign_reviewers",
+            "taskReferenceName": "assignReviewers",
+            "inputParameters": {
+              "http_request": {
+                "method": "POST",
+                "uri": "${workflow.input.pull_request.url}/requested_reviewers",
+                "headers": {
+                  "Authorization": "token ${workflow.secrets.ghp_your_github_token}",
+                  "Accept": "application/vnd.github.v3+json"
+                },
+                "body": {
+                  "reviewers": ["<GITHUB-ID>"]
+                }
+              }
+            },
+            "type": "HTTP"
+          }
+        ]
+      },
+      "defaultCase": [
+        {
+          "name": "terminate_non_opened",
+          "taskReferenceName": "terminateNonOpened",
+          "type": "TERMINATE",
+          "inputParameters": {
+            "terminationStatus": "COMPLETED",
+            "reason": "Ignoring non-opened PR event: ${workflow.input.action}"
+          }
+        }
+      ]
+    }
+  ],
+  "schemaVersion": 2
 }
 ```
 
@@ -82,36 +95,9 @@ In this tutorial, we will create the workflow using Conductor UI.
 
 Your workflow will look like this:
 
-<p align="center"><img src="/content/img/github-pr-reviewer-assignment-workflow.png" alt="The GitHub PR Reviewer Assignment Workflow" width="50%" height="auto" /></p>
+<p align="center"><img src="/content/img/github-pr-reviewer-assignment-workflow.png" alt="The GitHub PR Reviewer Assignment Workflow" width="90%" height="auto" /></p>
 
-- The workflow begins with a [Wait for Webhook task](https://orkes.io/content/reference-docs/system-tasks/wait-for-webhook) that listens for incoming webhook events from GitHub. 
-- When a pull request is opened, this task captures the event and passes it on to the next step: an [HTTP task](https://orkes.io/content/reference-docs/system-tasks/http) that sends a POST request to the GitHub API to assign a reviewer.
-
-### Using the Wait for Webhook task
-
-Let’s examine how the input matches must be defined for a Wait for Webhook task. The input matches are the conditions that incoming payloads must meet to trigger the webhook.
-
-As evident from the [sample GitHub webhook payload](https://docs.github.com/en/webhooks/webhook-events-and-payloads#example-webhook-delivery), the payload for new PRs is `"action": "opened"`. So you need to configure the [input matches for the Wait for Webhook task](https://orkes.io/content/reference-docs/system-tasks/wait-for-webhook#writing-custom-matches) to match this condition:  
-
-```json
-// workflow definition
-     "name": "wait_for_pr_open",
-     "taskReferenceName": "waitForPR",
-     "inputParameters": {
-       "matches": {
-         "$['action']": "opened"
-       }
-     },
-     "type": "WAIT_FOR_WEBHOOK",
-```
-
-This ensures the event triggers only for new pull request events.
-
-:::tip
-If you are setting up a webhook for any other action, refer to the [sample payload in the GitHub documentation](https://docs.github.com/en/webhooks/webhook-events-and-payloads) and configure the input matches accordingly.
-:::
-
-Now that the workflow is set up, the next step is to get the personal access token from your GitHub account.
+The workflow uses a [Switch task](/content/reference-docs/operators/switch) to evaluate the incoming event's action field. If the action is opened, it sends a POST request to the GitHub API to assign a reviewer. For all other actions, it terminates cleanly without processing. Unlike a long-running workflow that waits for events, each PR event starts a fresh execution, giving you a clean execution record per PR and better observability.
 
 ## Step 2: Get an access token from the GitHub account
 
@@ -155,7 +141,7 @@ Your token is now securely stored with Conductor. Returning to your workflow, yo
 
 ## Step 4: Create a webhook in Conductor
 
-The next step is to create a webhook in Conductor that will listen for events coming from GitHub.
+Next, create a webhook in Conductor to receive events from GitHub and trigger your workflow on each incoming PR event.
 
 **To create a webhook:**
 
@@ -163,9 +149,11 @@ The next step is to create a webhook in Conductor that will listen for events co
 2. Select **+ New webhook.**
 3. Configure the following parameters:
     - In **Webhook name**, enter a unique name for the webhook.
-    - In **Workflows to receive Webhook event**, select the workflow created in [Step 1](/content/tutorials/github-webhook#step-1-create-a-pr-reviewer-assignment-workflow).
     - Select the **Source platform** as **GitHub**.
     - In **Secret**, enter a random secret key, which will be used to authenticate the webhook connection in GitHub. Make sure to note this value.
+    - Enable **Start workflow when webhook event comes**.
+    - In **Workflow name**, select the workflow created in [Step 1](/content/tutorials/github-webhook#step-1-create-a-pr-reviewer-assignment-workflow).
+    - In **Version**, select **Version 1**.
 4. Select **Save**.
 
 <p align="center"><img src="/content/img/github-webhook-conductor.png" alt="Creating a GitHub webhook in Conductor" width="80%" height="auto" /></p>
@@ -199,21 +187,21 @@ This saves the webhook and sends a sample event to Conductor, which verifies the
 
 <p align="center"><img src="/content/img/github-webhook-verified.png" alt="GitHub webhook verified in Conductor" width="100%" height="auto" /></p>
 
-## Step 6: Modify and run the workflow
+## Step 6: Modify the workflow
 
-Before executing the workflow, update it with the GitHub ID of the reviewer you want to assign the pull request to. This user must have write access to the repository.
+Before the workflow can assign reviewers, update it with the GitHub username of the reviewer you want to assign pull requests to. This user must have write access to the repository.
 
 To modify the workflow, go back to your workflow definition and select the HTTP task. Replace `<GITHUB-ID>` with the actual GitHub username of the intended reviewer.
 
 <p align="center"><img src="/content/img/modify-github-workflow.png" alt="Modifying GitHub workflow" width="100%" height="auto" /></p>
 
-Once updated, select **Execute** to start the execution. It will now run and wait for incoming events from GitHub.
+Save the workflow. Now, the workflow will automatically start a new execution each time GitHub sends a PR event to your Conductor webhook.
 
 ## Step 7: Submit a PR in the GitHub repository
 
 To test the setup, have another user open a sample pull request in your GitHub repository.
 
-This action triggers the webhook and sends a payload to your Conductor workflow. Once received, the workflow executes the HTTP task to assign the pull request to the specified reviewer.
+This triggers the GitHub webhook, which sends the PR event to Conductor and starts a new workflow execution. The Switch task evaluates the event and, since the action is `opened`, the HTTP task assigns the pull request to the specified reviewer.
 
 <p align="center"><img src="/content/img/submitting-pr.gif" alt="Creating a PR on the repository" width="100%" height="auto" /></p>
 
@@ -222,8 +210,6 @@ The PR may appear as a self-requested review if the reviewer is the same GitHub 
 :::
 
 To confirm everything is working as expected, head to **Executions** > **Workflow** in your Conductor cluster and select your workflow. In the HTTP task, review the workflow execution details, including the event payload.
-
-<p align="center"><img src="/content/img/github-workflow-introspection.png" alt="Inspecting the workflow execution" width="100%" height="auto" /></p>
 
 You have now automated the PR assignment process. 
 
@@ -246,75 +232,90 @@ Go to your workflow definition and switch to the **Code** tab. Replace the exist
 
 ```json
 {
- "name": "github_pr_reviewer_assignment",
- "description": "Assign reviewers when a PR is opened",
- "version": 2,
- "tasks": [
-   {
-     "name": "wait_for_pr_open",
-     "taskReferenceName": "waitForPR",
-     "inputParameters": {
-       "matches": {
-         "$['action']": "opened"
-       }
-     },
-     "type": "WAIT_FOR_WEBHOOK"
-   },
-   {
-     "name": "fetch_files_changed",
-     "taskReferenceName": "fetchChanged",
-     "inputParameters": {
-       "http_request": {
-         "method": "GET",
-         "uri": "${waitForPR.output.pull_request.url}/files",
-         "headers": {
-           "Authorization": "token ${workflow.secrets.ghp_your_github_token}",
-           "Accept": "application/vnd.github.v3+json"
-         }
-       }
-     },
-     "type": "HTTP"
-   },
-   {
-     "name": "determine_reviewers",
-     "taskReferenceName": "determineReviewers",
-     "inputParameters": {
-       "source": "${fetchChanged.output.response.body}",
-       "queryExpression": "if any(.source[]; .filename | test(\".*\\\\.md$\")) then [\"<DOC-REVIEWER>\"] else [\"<CODE-REVIEWER>\"] end"
-     },
-     "type": "JSON_JQ_TRANSFORM"
-   },
-   {
-     "name": "assign_reviewers",
-     "taskReferenceName": "assignReviewers",
-     "inputParameters": {
-       "http_request": {
-         "method": "POST",
-         "uri": "${waitForPR.output.pull_request.url}/requested_reviewers",
-         "headers": {
-           "Authorization": "token ${workflow.secrets.ghp_your_github_token}",
-           "Accept": "application/vnd.github.v3+json"
-         },
-         "body": {
-           "reviewers": "${determineReviewers.output.resultList[0]}"
-         }
-       }
-     },
-     "type": "HTTP"
-   }
- ],
- "schemaVersion": 2
+  "name": "github_pr_reviewer_assignment",
+  "description": "Assign reviewers when a PR is opened",
+  "version": 2,
+  "tasks": [
+    {
+      "name": "check_pr_action",
+      "taskReferenceName": "checkAction",
+      "type": "SWITCH",
+      "evaluatorType": "value-param",
+      "expression": "action",
+      "inputParameters": {
+        "action": "${workflow.input.action}"
+      },
+      "decisionCases": {
+        "opened": [
+          {
+            "name": "fetch_files_changed",
+            "taskReferenceName": "fetchChanged",
+            "inputParameters": {
+              "http_request": {
+                "method": "GET",
+                "uri": "${workflow.input.pull_request.url}/files",
+                "headers": {
+                  "Authorization": "token ${workflow.secrets.ghp_your_github_token}",
+                  "Accept": "application/vnd.github.v3+json"
+                }
+              }
+            },
+            "type": "HTTP"
+          },
+          {
+            "name": "determine_reviewers",
+            "taskReferenceName": "determineReviewers",
+            "inputParameters": {
+              "source": "${fetchChanged.output.response.body}",
+              "queryExpression": "if any(.source[]; .filename | test(\".*\\\\.md$\")) then [\"<DOC-REVIEWER>\"] else [\"<CODE-REVIEWER>\"] end"
+            },
+            "type": "JSON_JQ_TRANSFORM"
+          },
+          {
+            "name": "assign_reviewers",
+            "taskReferenceName": "assignReviewers",
+            "inputParameters": {
+              "http_request": {
+                "method": "POST",
+                "uri": "${workflow.input.pull_request.url}/requested_reviewers",
+                "headers": {
+                  "Authorization": "token ${workflow.secrets.ghp_your_github_token}",
+                  "Accept": "application/vnd.github.v3+json"
+                },
+                "body": {
+                  "reviewers": "${determineReviewers.output.resultList[0]}"
+                }
+              }
+            },
+            "type": "HTTP"
+          }
+        ]
+      },
+      "defaultCase": [
+        {
+          "name": "terminate_non_opened",
+          "taskReferenceName": "terminateNonOpened",
+          "type": "TERMINATE",
+          "inputParameters": {
+            "terminationStatus": "COMPLETED",
+            "reason": "Ignoring non-opened PR event: ${workflow.input.action}"
+          }
+        }
+      ]
+    }
+  ],
+  "schemaVersion": 2
 }
 ```
 
-Save the workflow. This saves the workflow as a new version, i.e., version 2. It introduces two key enhancements:
+Save the workflow. This saves the workflow as a new version, i.e., version 2. It introduces two enhancements inside the `opened` case:
 
 - An additional [HTTP task](https://orkes.io/content/reference-docs/system-tasks/http) to fetch the list of files changed in the pull request using the GitHub API.
 - A [JSON JQ Transform task](https://orkes.io/content/reference-docs/system-tasks/jq-transform) to analyze those files and determine the appropriate reviewer based on the file type. It checks if any of the changed files end with `.md`. If yes, the workflow assigns the PR to a **documentation reviewer**. Otherwise, it assigns a **code reviewer**.
 
-<p align="center"><img src="/content/img/github-workflow-versions.png" alt="2 versions of the github workflow" width="70%" height="auto" /></p>
+<p align="center"><img src="/content/img/github-workflow-versions.png" alt="2 versions of the github workflow" width="90%" height="auto" /></p>
 
-Before running the workflow:
+Before testing:
 
 - In the JSON JQ Transform task, update the placeholders with the actual GitHub usernames of your doc and code reviewers. Ensure these users are added as collaborators on the GitHub repository.
 
@@ -324,11 +325,11 @@ Before running the workflow:
 
 <p align="center"><img src="/content/img/updating-github-webhook.png" alt="Updating GitHub Webhook in Orkes Conductor" width="60%" height="auto" /></p>
 
-Save the changes, then run the workflow and have another random user submit a pull request with a .py file.
+Save the changes, then have a random user submit a pull request with a .py file.
 
 <p align="center"><img src="/content/img/code-pr.gif" alt="Submitting a code PR" width="100%" height="auto" /></p>
 
-The PR is automatically assigned to reviewer *acme* (code reviewer). Rerun the workflow and submit a PR that includes a .md file.
+The PR is automatically assigned to reviewer *acme* (code reviewer). Now submit a PR that includes a .md file.
 
 <p align="center"><img src="/content/img/doc-pr.gif" alt="Submitting a doc PR" width="100%" height="auto" /></p>
 
@@ -336,25 +337,10 @@ This time, the PR is assigned to *JohnDoe* (doc reviewer).
 
 With this dynamic routing in place, reviewer assignment is now fully automated based on the nature of the PR, making your review process faster, smarter, and scalable.
 
-## Automate using Scheduler
-
-So far, we’ve manually triggered the workflow for testing purposes. However, in a real-world production setup, pull requests should be automatically processed as they arrive without requiring manual intervention.
-
-To achieve this, you can use [Orkes Conductor’s Scheduler](https://orkes.io/content/developer-guides/scheduling-workflows), which supports cron-based triggers for running workflows at defined intervals.
-
-For this use case, running the workflow every minute is typically sufficient. You can configure this by setting up a schedule with the following cron expression:
-
-```json
-0 * * ? * *
-```
-
-Once set up, Conductor will continuously poll for new PR events and process them as they arrive, fully automated and production-ready.
-
 ## Workflow modifications
 
 This dynamic PR reviewer workflow can be extended by:
 
 - Sending notifications to Slack using a Slack webhook when a PR is opened or a reviewer is assigned.
-- Prefer Microsoft Teams? You can use a Microsoft Teams webhook to post similar notifications directly to a designated channel.
 - Replacing the JSON JQ Transform task with a Switch task as your routing logic grows to support multiple reviewer groups or more complex branching.
 - Adding approval or QA steps before merging to include additional verification in the process.

@@ -302,7 +302,7 @@ Marks a task as failed using one of the following methods:
 | --------- | ----------- | ----------------- |
 | actions. **action** | The action to be triggered on receiving events. Set this to `fail_task`. | Required. | 
 | actions. fail_task. **workflowId** | The execution ID of the workflow that contains the task to be marked as failed. | Required if using `workflowId` and `taskRefName`method. |
-| actions. fail_task. **taskRefName** | The reference name of the task to be marked as failed. | Required if using `workflowId` and `taskRefName`method. | Required if using `workflowId` and `taskRefName`method. |
+| actions. fail_task. **taskRefName** | The reference name of the task to be marked as failed. | Required if using `workflowId` and `taskRefName`method. | 
 | actions. fail_task. **taskId** | The task execution ID of the task to be marked as failed. | Required if using `taskId` method. |
 | actions. fail_task. **output** | The output data to be sent along with the completion. Can be string, number, boolean, null, or object/array. | Optional. | 
 

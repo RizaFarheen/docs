@@ -146,16 +146,28 @@ Select your preferred language and use the code example to define and register t
 
 <TabItem value="CSharp" label="C#">
 
-```java
-    @WorkerTask("fraud-check")
-    public String checkForFraud(@InputParam("amount") BigDecimal amount, @InputParam("accountId") String accountId) {
-        boolean isFraud = fraudService.isFraudulentTxn(accountId, amount);
-        if(isFraud) {
-            return "This transaction cannot be processed as its flagged for review.";
-        }
-        return "Deposit of " + amount + " has processed successfully";
-    }
+```csharp
+var getUserInfoTask = new SimpleTask("get_user_info", "get_user_info")
+    .WithInput("userId", "${workflow.input.userId}");
 
+var emailOrSmsTask = new SwitchTask("emailorsms", "${workflow.input.notificationPref}")
+    .WithDecisionCase(
+        WorkflowInput.NotificationPreference.EMAIL.ToString(),
+        new SimpleTask("send_email", "send_email")
+            .WithInput("email", "${get_user_info.output.email}")
+    )
+    .WithDecisionCase(
+        WorkflowInput.NotificationPreference.SMS.ToString(),
+        new SimpleTask("send_sms", "send_sms")
+            .WithInput("phoneNumber", "${get_user_info.output.phoneNumber}")
+    );
+
+return new ConductorWorkflow()
+    .WithName("user_notification")
+    .WithVersion(1)
+    .WithInputParameter("userId")
+    .WithInputParameter("notificationPref")
+    .WithTask(getUserInfoTask, emailOrSmsTask);
 ```
 
 </TabItem>

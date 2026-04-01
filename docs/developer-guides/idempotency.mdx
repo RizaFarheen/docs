@@ -47,7 +47,7 @@ Use the [Start Workflow API](/content/reference-docs/api/workflow/start-workflow
 
 ```bash
 curl -X 'POST' \
-  'https://<YOUR-SERVER-URL?>/api/workflow/<WORKFLOW-NAME>?priority=0' \
+  'https://<YOUR-SERVER-URL>/api/workflow/<WORKFLOW-NAME>?priority=0' \
   -H 'accept: text/plain' \
   -H 'X-Idempotency-key: order-123' \
   -H 'X-on-conflict: FAIL' \

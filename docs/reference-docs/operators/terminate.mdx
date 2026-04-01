@@ -80,57 +80,63 @@ In this example, a shipping workflow selects a provider based on runtime input. 
 
 ```json
 {
- "name": "shipping-workflow",
- "description": "Terminate workflow when shipping provider is unsupported",
- "version": 1,
- "tasks": [
-   {
-     "name": "validate_provider",
-     "taskReferenceName": "validate_provider_ref",
-     "inputParameters": {
-       "shippingProvider": "${workflow.input.shippingProvider}"
-     },
-     "type": "SWITCH",
-     "decisionCases": {
-       "fedex": [
-         {
-           "name": "process_fedex",
-           "taskReferenceName": "process_fedex_ref",
-           "inputParameters": {},
-           "type": "SIMPLE"
-         }
-       ],
-       "dhl": [
-         {
-           "name": "process_dhl",
-           "taskReferenceName": "process_dhl_ref",
-           "inputParameters": {},
-           "type": "SIMPLE"
-         }
-       ]
-     },
-     "defaultCase": [
-       {
-         "name": "terminate_workflow",
-         "taskReferenceName": "terminate_workflow_ref",
-         "inputParameters": {
-           "terminationStatus": "FAILED",
-           "terminationReason": "Unsupported shipping provider",
-           "workflowOutput": {
-             "error": "The specified shipping provider is not supported."
-           }
-         },
-         "type": "TERMINATE"
-       }
-     ],
-     "evaluatorType": "value-param",
-     "expression": "shippingProvider"
-   }
- ],
- "inputParameters": [
-   "shippingProvider"
- ],
- "schemaVersion": 2
+  "name": "shipping-workflow",
+  "description": "Terminate workflow when shipping provider is unsupported",
+  "version": 1,
+  "tasks": [
+    {
+      "name": "validate_provider",
+      "taskReferenceName": "validate_provider_ref",
+      "inputParameters": {
+        "shippingProvider": "${workflow.input.shippingProvider}"
+      },
+      "type": "SWITCH",
+      "decisionCases": {
+        "fedex": [
+          {
+            "name": "process_fedex",
+            "taskReferenceName": "process_fedex_ref",
+            "type": "INLINE",
+            "inputParameters": {
+              "evaluatorType": "graaljs",
+              "expression": "(function(){ return { provider: 'fedex' }; })()"
+            }
+          }
+        ],
+        "dhl": [
+          {
+            "name": "process_dhl",
+            "taskReferenceName": "process_dhl_ref",
+            "type": "INLINE",
+            "inputParameters": {
+              "evaluatorType": "graaljs",
+              "expression": "(function(){ return { provider: 'dhl' }; })()"
+            }
+          }
+        ]
+      },
+      "defaultCase": [
+        {
+          "name": "terminate_workflow",
+          "taskReferenceName": "terminate_workflow_ref",
+          "inputParameters": {
+            "terminationStatus": "FAILED",
+            "terminationReason": "Unsupported shipping provider",
+            "workflowOutput": {
+              "error": "The specified shipping provider is not supported."
+            }
+          },
+          "type": "TERMINATE"
+        }
+      ],
+      "evaluatorType": "value-param",
+      "expression": "shippingProvider"
+    }
+  ],
+  "inputParameters": [
+    "shippingProvider"
+  ],
+  "schemaVersion": 2
 }
 ```
 
@@ -153,6 +159,20 @@ This workflow supports only two shipping providers: *fedex* and *dhl*. If any ot
 This executes the workflow, and because *ups* is not a supported value, the workflow is terminated using the Terminate task.
 
 <p align="center"><img src="/content/img/terminate-example.png" alt="Terminate Example" width="90%" height="auto"></img></p>
+
+To observe a successful branch, run the workflow again with a supported provider:
+
+```json
+{
+  "shippingProvider": "fedex"
+}
+```
+
+This time, the Switch task matches the `fedex` case and executes `process_fedex_ref`, which completes immediately. The Terminate task is not reached and the workflow completes normally.
+
+<p align="center"><img src="/content/img/terminate-example-fedex.png" alt="Terminate Example" width="90%" height="auto"></img></p>
+
+The `process_fedex` and `process_dhl` tasks in this example use the Inline task. In a production workflow, replace these with your own task types and business logic.
 
 </p>
 </details>

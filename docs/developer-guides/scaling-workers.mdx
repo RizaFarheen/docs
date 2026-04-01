@@ -25,7 +25,7 @@ Each of the metrics below contains `taskType` as a tag that can be used to monit
 ## Pending requests (Gauge)
 
 ```javascript
-max(task_queue_depth{taskType=})
+max(task_queue_depth{taskType="<task_definition_name>"})
 ```
 **How to use the metric:**
 1. The goal should be to keep the queue depth constant (it may not be zero if the tasks are long running).
@@ -36,7 +36,7 @@ max(task_queue_depth{taskType=})
 `task_completed_seconds_count` is published as a counter with `taskType` as a tag.
 
 ```javascript
-rate(task_completed_seconds_count{taskType=}[$__rate_interval])
+rate(task_completed_seconds_count{taskType="<task_definition_name>"}[$__rate_interval])
 ```
 **How to use the metric:**
 1. The metric shows the throughput.  The goal is to keep the throughput at a threshold depending on the application's needs.
@@ -47,7 +47,7 @@ rate(task_completed_seconds_count{taskType=}[$__rate_interval])
 This metric measures the time the task was sitting in the queue before getting picked up by a worker.
 
 ```javascript
-max(task_queue_wait_time_seconds{quantile=, taskType=})
+max(task_queue_wait_seconds{quantile="<quantile>",taskType="<task_definition_name>"})
 ```
 
 **How to use the metric:**
