@@ -17,13 +17,41 @@ const config = {
   projectName: "docs", // Usually your repo name.
   trailingSlash: false,
   scripts: [
-    "https://www.googletagmanager.com/gtag/js?id=G-4400JPTLRF",
+    {
+      src: "https://www.googletagmanager.com/gtag/js?id=G-4400JPTLRF",
+      async: true,
+    },
     {
       src: baseUrlName + "/js/ga.js",
       async: true,
     },
     {
       src: baseUrlName + "/js/leadMagic.js",
+      async: true,
+    },
+  ],
+  headTags: [
+    {
+      tagName: "link",
+      attributes: {
+        rel: "preconnect",
+        href: "https://fonts.googleapis.com",
+      },
+    },
+    {
+      tagName: "link",
+      attributes: {
+        rel: "preconnect",
+        href: "https://fonts.gstatic.com",
+        crossorigin: "anonymous",
+      },
+    },
+    {
+      tagName: "link",
+      attributes: {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700;800&display=swap",
+      },
     },
   ],
   plugins: [
