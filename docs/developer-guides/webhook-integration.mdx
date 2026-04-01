@@ -11,7 +11,7 @@ import Install from '@site/src/components/install.mdx';
 
 Webhooks are HTTP callback functions that enable Orkes Conductor to interact with external systems in real time. When an event occurs on an external platform, a webhook sends event data to Conductor. This enables:
 
-- Workflows (containing webhook tasks) to receive incoming webhook events.
+- Workflows containing a Wait for Webhook task to receive incoming webhook events.
 - To trigger other workflows in response to incoming webhook events.
 
 Orkes Conductor supports webhook integration with the following platforms:
@@ -91,7 +91,7 @@ Here is the JSON schema for a webhook:
 ```json
  {
  "name": "custom",
- "id": "a76c3079-fd0b-11f0-ab58-02507096cc5a",
+ "id": "a76c3079-fd0b-11f0-abcsjnekjndejde",
  "receiverWorkflowNamesToVersions": {
    "sample-webhook-postman": 1
  },

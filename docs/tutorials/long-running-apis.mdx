@@ -104,6 +104,8 @@ Let’s run the workflow using Conductor UI. Open your workflow definition, and 
 
 The workflow begins, and the polling task continues to call the API at regular intervals until the response meets the termination condition (for example, when the status is set to COMPLETED). Once the condition is met, the workflow is completed successfully.
 
+Replace `orkes-api-tester.orkesconductor.com` with your own API endpoint before using this workflow in practice.
+
 ## Method 2: Handle long-running APIs using async complete
 
 When `asyncComplete` is set to true, Conductor expects the HTTP endpoint to perform the work asynchronously and return an immediate acknowledgment (HTTP 200 or 202) instead of waiting for the operation to finish. The task then stays `IN_PROGRESS` until the external service marks it as `COMPLETED`. This ensures that Conductor can manage asynchronous operations without blocking or hitting HTTP timeouts.

@@ -24,7 +24,7 @@ Before adding a Human task to a workflow, you should complete the following:
 - Create a user form in Orkes Conductor.
 - Define the Human task in Conductor.
 
-For a complete guide on how to use human-involved tasks, refer to the [Human Task Orchestration guide](docs/developer-guides/orchestrating-human-tasks.mdx).
+For a complete guide on how to use human-involved tasks, refer to the [Human Task Orchestration guide](/content/developer-guides/orchestrating-human-tasks).
 :::
 
 ## Task parameters
@@ -42,7 +42,7 @@ Here are all the parameters for the Human task.
 | Parameter                              | Description                                                            | Required/ Optional |
 | -------------------------------------- | ---------------------------------------------------------------------- | ------------------ |
 | displayName                            | The task display name, which will appear on the connected UI for the user. Use a unique human-friendly name (for example, “Loan Approval” or “Booking Form”).                                                                                                                                                                                                                                        | Required.          |
-| userFormTemplate                       | The user form associated with the Human task. This form will be assigned when the Human task is executed. <br/><br/>**Note**: If you haven’t created the user form, go to **Definitions** > **User Forms** and set it up. Refer to the documentation for [creating user forms](docs/developer-guides/orchestrating-human-tasks.mdx).                                                                                                                                                                              | Required.          |
+| userFormTemplate                       | The user form associated with the Human task. This form will be assigned when the Human task is executed. <br/><br/>**Note**: If you haven’t created the user form, go to **Definitions** > **User Forms** and set it up. Refer to the documentation for [creating user forms](/content/developer-guides/orchestrating-human-tasks#step-1-create-a-user-form-schema).                                                                                                                                                                              | Required.          |
 | userFormTemplate. **name**             | The name of the user form.                                                                                                                                                                                                                                                                             | -                  |
 | userFormTemplate. **version**          | The version of the user form.                                                                                                                                                                                                                                                                             | -                  |
 | assignments                            | The assignment policy for the Human task.                                                                                                                                                                                                                                                                                         | Optional.          |

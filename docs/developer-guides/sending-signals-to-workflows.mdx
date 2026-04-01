@@ -64,7 +64,7 @@ func (e *WorkflowExecutor) Pause(workflowId string) error
 <TabItem value="Python" label="Python">
 
 ```python
-WorkflowResourceApi.pause_workflow1(self, workflow_id, **kwargs)
+WorkflowResourceApi.pause_workflow(self, workflow_id, **kwargs)
 ```
 
 </TabItem>
@@ -149,7 +149,7 @@ func (e *WorkflowExecutor) Resume(workflowId string) error
 <TabItem value="Python" label="Python">
 
 ```python
-WorkflowResourceApi.resume_workflow1(self, workflow_id, **kwargs)
+WorkflowResourceApi.resume_workflow(self, workflow_id, **kwargs)
 ```
 
 </TabItem>
@@ -246,7 +246,7 @@ func (e *WorkflowExecutor) Restart(workflowId string, useLatestDefinition bool) 
 <TabItem value="Python" label="Python">
 
 ```python
-WorkflowResourceApi.restart1(self, workflow_id, **kwargs)
+WorkflowResourceApi.restart(self, workflow_id, **kwargs)
 ```
 
 </TabItem>
@@ -519,7 +519,7 @@ func (e *WorkflowExecutor) Retry(workflowId string, resumeSubworkflowTasks bool)
 <TabItem value="Python" label="Python">
 
 ```python
-WorkflowResourceApi.retry1(self, workflow_id, **kwargs)
+WorkflowResourceApi.retry(self, workflow_id, **kwargs)
 ```
 
 </TabItem>
@@ -709,7 +709,7 @@ func (e *WorkflowExecutor) Terminate(workflowId string, reason string) error
 <TabItem value="Python" label="Python">
 
 ```python
-WorkflowResourceApi.terminate1(self, workflow_id, **kwargs)
+WorkflowResourceApi.terminate(self, workflow_id, **kwargs)
 ```
 
 </TabItem>

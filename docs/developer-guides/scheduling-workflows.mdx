@@ -71,6 +71,10 @@ You can also use macros for common schedules, such as:
 * **@daily** or **@midnight**: Executes once a day at midnight (0 0 0 * * *).
 * **@hourly**: Executes once every hour (0 0 * * * *).
 
+:::info Note
+Orkes Conductor uses Quartz cron syntax, which is a 6-field format with seconds as the first field. This differs from standard 5-field cron syntax.
+:::
+
 When the schedule triggers the workflow, the following fields are automatically injected as input to the workflow:
 
 ```json
