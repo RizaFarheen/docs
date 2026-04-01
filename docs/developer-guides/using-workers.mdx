@@ -253,6 +253,8 @@ task_handler.start_processes()
 task_handler.join_processes()
 ```
 
+`task_handler.join_processes()` blocks the main thread indefinitely, keeping the worker running until the process is killed. To stop the worker gracefully (for example, in response to a shutdown signal), call `task_handler.stop_processes()` instead.
+
 </TabItem>
 
 <TabItem value="java" label="Java">
