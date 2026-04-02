@@ -141,7 +141,7 @@ If a secret named `api_key` with the value `Xxhhjiu0nbfdinvdHyj` is stored in yo
 }
 ```
 
-At runtime, the parameter `auth` will take on the value `USXxhhjiu0nbfdinvdHyj`. This value will not be exposed in the workflow execution JSON, and users will only see the reference expression while inspecting the JSON object:
+At runtime, the dynamic parameter `auth` resolves to the value of the secret `api_key`. This value will not be exposed in the workflow execution JSON, and users will only see the reference expression while inspecting the JSON object:
 
 ```json
 {

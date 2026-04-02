@@ -136,7 +136,7 @@ This saves a private key to your device.
 
 Next, we need to stringify the contents of the JSON file  using the following command:
 
-```python
+```bash
 python3 -c 'import json; print(json.dumps(json.load(open("<PATH-TO-JSON-FILE>/project-name.json"))))'
 ```
 
@@ -242,26 +242,26 @@ Next, launch the Python-based backend server that listens for incoming requests 
 
 Set the Python path:
 
-```python
+```bash
 export PYTHONPATH=/[PATH_TO_REPO]/awesome-conductor-apps/python/interview_agentic_app
 ```
 
 Create and activate a virtual environment:
 
-```python
+```bash
 python3 -m venv venv
 source venv/bin/activate
 ```
 
 Install required dependencies:
 
-```python
+```bash
 pip3 install -r requirements.txt
 ```
 
 Start the backend server:
 
-```python
+```bash
 cd workflow
 python app.py
 ```
@@ -278,19 +278,19 @@ Now, launch the Next.js frontend server where candidates can enter their informa
 
 In  a new terminal, go to the frontend directory:
 
-```python
+```bash
 cd python/interview_agentic_app/interview-chat
 ```
 
 Install dependencies:
 
-```js
+```bash
 npm install --legacy-peer-deps
 ```
 
 Start the frontend server:
 
-```js
+```bash
 npm run dev
 ```
 
@@ -315,6 +315,10 @@ In parallel, a fully formatted Google Docs transcript is generated and stored in
 <p align="center"><img src="/content/img/interview-transcript.jpg" alt="Interview transcription generated" width="100%" height="auto"></img></p>
 
 You now have a fully functional agentic interview app that orchestrates candidate interactions, automates interview workflows, and delivers results seamlessly.
+
+**To stop the servers:**
+
+Press Ctrl+C in each terminal to stop the backend and frontend servers.
 
 ## Troubleshooting
 
