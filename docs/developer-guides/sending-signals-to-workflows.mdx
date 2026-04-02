@@ -13,7 +13,7 @@ You can manage and automate workflows in Orkes Conductor by sending signals to p
 
 - **Using Conductor UI**: Perform actions such as pause, resume, restart, rerun, retry, or terminate directly from the workflow execution page.
 - **Using APIs**: Send REST API requests to control workflows programmatically.
-- **Using SDKs**: Integrate workflow control into your applications using SDKs in Java, Go, Python, C#, JavaScript/TypeScript, or Clojure.
+- **Using SDKs**: Integrate workflow control into your applications using SDKs in Java, Go, Python, C#, or JavaScript/TypeScript.
 
 ## Run workflow
 
@@ -93,13 +93,6 @@ WorkflowExecutor.pauseWorkflow(
 ```
 
 </TabItem>
-<TabItem value="Clojure" label="Clojure">
-
-```clojure
-(workflow-resource/pause-workflow [options workflow-id])
-```
-
-</TabItem>
 </Tabs>
 
 </TabItem>
@@ -176,13 +169,6 @@ WorkflowExecutor.resume(
 WorkflowExecutor.resume(
     workflowId: string,
 ): CancelablePromise<any>
-```
-
-</TabItem>
-<TabItem value="Clojure" label="Clojure">
-
-```clojure
-(workflow-resource/resume-workflow [options workflow-id])
 ```
 
 </TabItem>
@@ -277,13 +263,6 @@ WorkflowExecutor.restart(
 ```
 
 </TabItem>
-<TabItem value="Clojure" label="Clojure">
-
-```clojure
-(workflow-resource/restart-workflow [options workflow-id])
-```
-
-</TabItem>
 </Tabs>
 
 </TabItem>
@@ -365,13 +344,6 @@ WorkflowResourceService.rerun(
     workflowId: string,
     requestBody: RerunWorkflowRequest,
 ): CancelablePromise<string>
-```
-
-</TabItem>
-<TabItem value="Clojure" label="Clojure">
-
-```clojure
-(workflow-resource/rerun-workflow [options workflow-id rerun-wf-request])
 ```
 
 </TabItem>
@@ -461,13 +433,6 @@ WorkflowResourceService.rerun(
 ```
 
 </TabItem>
-<TabItem value="Clojure" label="Clojure">
-
-```clojure
-(workflow-resource/rerun-workflow [options workflow-id rerun-wf-request])
-```
-
-</TabItem>
 </Tabs>
 
 </TabItem>
@@ -547,13 +512,6 @@ WorkflowExecutor.retry(
     workflowId: string,
     resumeSubworkflowTasks: boolean,
 ): CancelablePromise<void>
-```
-
-</TabItem>
-<TabItem value="Clojure" label="Clojure">
-
-```clojure
-(workflow-resource/retry-last-failed-task [options workflow-id resume-subworkflow-tasks])
 ```
 
 </TabItem>
@@ -652,13 +610,6 @@ TaskResourceService.updateTask(
 ```
 
 </TabItem>
-<TabItem value="Clojure" label="Clojure">
-
-```clojure
-(task-resource/update-task-by-reference-name options workflow-id task-reference-name status update-req)
-```
-
-</TabItem>
 </Tabs>
 
 </TabItem>
@@ -737,13 +688,6 @@ WorkflowExecutor.terminate(
     workflowId: string,
     reason: string,
 ): CancelablePromise<any>
-```
-
-</TabItem>
-<TabItem value="Clojure" label="Clojure">
-
-```clojure
-(workflow-resource/terminate-workflow [options workflow-id & args])
 ```
 
 </TabItem>

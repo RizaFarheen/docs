@@ -927,11 +927,6 @@ const sidebars = {
                     id: 'sdks/golang',
                     label: 'Go',
                 },
-                {
-                    type: 'doc',
-                    id: 'sdks/clojure',
-                    label: 'Clojure',
-                },
             ],
         },
         {

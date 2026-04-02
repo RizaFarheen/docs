@@ -99,17 +99,6 @@ go get github.com/conductor-sdk/conductor-go
 ```
 
 </TabItem>
-
-<TabItem value="clojure" label="Clojure">
-
-Get the Conductor Clojure package from [clojars](https://clojars.org/io.orkes/conductor-clojure).
-
-``` clojure
-:deps {org.clojure/clojure {:mvn/version "1.11.0"}
-        io.orkes/conductor-clojure {:mvn/version "0.3.0"}}
-```
-
-</TabItem>
 </Tabs>
 
 
@@ -216,20 +205,6 @@ func myTask(task *model.Task) (interface{}, error) {
 
 Check out the full sample worker project in Go: https://github.com/conductor-oss/conductor-apps/tree/main/go/developer-guides/using-workers
 
-
-</TabItem>
-
-<TabItem value="clojure" label="Clojure">
-
-``` clojure
-(def worker
-  {:name "myTask",
-   :execute (fn [d]
-              (let [name (get-in d [:inputData :name])]
-                {:status  "COMPLETED"
-                 :outputData {"message" (str "hello "  name)}}))})
-```
-Check out the full sample worker project in Clojure: https://github.com/conductor-oss/conductor-apps/tree/main/clojure/developer-guides/using-workers
 
 </TabItem>
 </Tabs>
@@ -341,21 +316,6 @@ apiClient := client.NewAPIClient(
 
 taskRunner = worker.NewTaskRunnerWithApiClient(apiClient)
 taskRunner.StartWorker("myTask", myTask, 1, time.Second*1)
-```
-
-</TabItem>
-
-<TabItem value="clojure" label="Clojure">
-
-``` clojure
-(defn -main
-  [& args]
-  ;; Create and run the task executor
-  (tr/runner-executer-for-workers options [worker])
-  ;; Keep the process running
-  (loop []
-    (Thread/sleep 1000)
-    (recur)))
 ```
 
 </TabItem>
