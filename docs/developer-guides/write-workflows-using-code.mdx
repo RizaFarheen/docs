@@ -238,22 +238,4 @@ const getUserDetailsTask = simpleTask(GET_USER_INFO, GET_USER_INFO, {
 return wf;
 ```
 </TabItem>
-<TabItem value="Clojure" label="Clojure">
-
-```clojure
-
-(defn create-tasks
-  "Returns workflow tasks"
-  []
-  (vector (sdk/simple-task (:get-user-info constants) (:get-user-info constants) {:userId "${workflow.input.userId}"})
-          (sdk/switch-task "emailorsms" "${workflow.input.notificationPref}" {"email" [(sdk/simple-task (:send-email constants) (:send-email constants) {"email" "${get_user_info.output.email}"})]
-                                                                              "sms" [(sdk/simple-task (:send-sms constants) (:send-sms constants) {"phoneNumber" "${get_user_info.output.phoneNumber}"})]} [])))
-
-(defn create-workflow
-  "Returns a workflow with tasks"
-  [tasks]
-  (merge (sdk/workflow (:workflow-name constants) tasks) {:inputParameters ["userId" "notificationPref"]}))
-
-```
-</TabItem>
 </Tabs>

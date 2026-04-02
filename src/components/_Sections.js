@@ -319,13 +319,6 @@ export const SDKList = ({}) => (
         alt="Go SDK"
       />
     </a>
-    <a className={"aClass"} href={"/content/sdks/clojure"}>
-      <img
-        src="/content/img/clojure.png"
-        style={{ height: 75, width: 75, margin: 5 }}
-        alt="Clojure SDK"
-      />
-    </a>
   </div>
 );
 export const CommunitySection = ({}) => (

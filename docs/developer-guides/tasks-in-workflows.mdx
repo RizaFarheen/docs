@@ -74,7 +74,7 @@ A [Worker task](../reference-docs/worker-task) can be used to implement custom l
 - Execute operations that require access to resources outside Conductor's environment
 - Perform computationally intensive processing that benefits from dedicated workers
 
-These tasks can be written in any programming language of your choice (Python, Java, JavaScript, C#, Go, and Clojure). Unlike a built-in task, a Worker task requires setting up a worker outside the Conductor environment that polls for and executes the task. Your worker application will continuously poll Conductor for tasks to execute, process them, and report results back.
+These tasks can be written in any programming language of your choice (Python, Java, JavaScript, C#, and Go). Unlike a built-in task, a Worker task requires setting up a worker outside the Conductor environment that polls for and executes the task. Your worker application will continuously poll Conductor for tasks to execute, process them, and report results back.
 
 Before adding a Worker task in a workflow, it must be registered as a task definition in Conductor. This allows Conductor to apply retries, timeouts, rate limits, and RBAC controls.
 
