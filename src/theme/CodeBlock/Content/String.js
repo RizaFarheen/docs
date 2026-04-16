@@ -40,7 +40,6 @@ export default function CodeBlockString({
   let titleUrl;
   let titleText;
   if (typeof titleType === "string" && titleType === "url") {
-    console.log("titleType: ", titleType);
     titleUrl = (
       <a href={title} target={"_blank"}>
         {titleLabel}
