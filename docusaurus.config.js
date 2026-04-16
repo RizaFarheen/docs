@@ -49,9 +49,16 @@ const config = {
     {
       tagName: "link",
       attributes: {
-        rel: "stylesheet",
+        rel: "preload",
         href: "https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700;800&display=swap",
+        as: "style",
+        onload: "this.onload=null;this.rel='stylesheet'",
       },
+    },
+    {
+      tagName: "noscript",
+      attributes: {},
+      innerHTML: '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700;800&display=swap">',
     },
   ],
   plugins: [
