@@ -5,7 +5,7 @@ description: "Learn how to build AI-powered workflows using AI tasks, LLM integr
 
 # AI Orchestration 
 
-Orkes Conductor provides features to build applications that use AI models and vector databases in workflows. These applications can range from simple AI-powered tasks to agentic workflows where decisions are made dynamically based on model output.
+Orkes Conductor provides features to build and orchestrate AI-powered applications using LLMs and vector databases. From simple LLM orchestration tasks to complex agentic AI orchestration where decisions are made dynamically based on model output, you can design, govern, and run AI workflows at scale.
 
 Key features include:
 
@@ -15,13 +15,14 @@ Key features include:
 
 You can use these features to build:
 
-* AI agents or agentic workflows
+* LLM orchestration pipelines
+* Agentic AI workflows
 * RAG (retrieval augmented generation) systems
 * LLM-powered chatbots
 
-## Orchestrating AI-powered tasks
+## AI and LLM tasks
 
-Orkes Conductor provides a variety of AI tasks that can execute common logic without the need to write code. Unlike Worker tasks, AI tasks are system tasks that are executed directly by Orkes Conductor and do not require you to deploy or run a worker process. Depending on the task type, these tasks may require an AI/LLM integration, a vector database integration, or an AI prompt.
+Orkes Conductor provides a variety of AI tasks that can execute common logic without the need to write code. Depending on the task type, these tasks may require an AI/LLM integration, a vector database integration, or an AI prompt.
 
 | AI Task     | Description                        |Prerequisites                 |
 |------------------- | ---------------------------------- |----------------------------- |
@@ -38,7 +39,39 @@ Orkes Conductor provides a variety of AI tasks that can execute common logic wit
 | [List Files](/reference-docs/ai-tasks/list-files) | Retrieve files from a specific storage location. | <ul><li>Integrate cloud providers for private files</li></ul> | 
 | [Parse Document](/reference-docs/ai-tasks/parse-document) | Retrieves, parses,  and chunk documents from various storage locations. | <ul><li>Integrate cloud providers for private files</li></ul> | 
 
-Once you have decided which task to use, check out the following guides to begin building AI-powered or agentic applications.
+## AI/LLM and vector database integrations
+
+Orkes Conductor integrates with the following AI/LLM providers: 
+
+- [Ollama](https://orkes.io/content/integrations/ai-llm/ollama)
+- [Azure + OpenAI](https://orkes.io/content/integrations/ai-llm/azure-open-ai)
+- [OpenAI](https://orkes.io/content/integrations/ai-llm/open-ai)
+- [Perplexity](https://orkes.io/content/integrations/ai-llm/perplexity)
+- [Grok](https://orkes.io/content/integrations/ai-llm/grok)
+- [Cohere​​](https://orkes.io/content/integrations/ai-llm/cohere)
+- [Mistral](https://orkes.io/content/integrations/ai-llm/mistral)
+- [Anthropic Claude](https://orkes.io/content/integrations/ai-llm/anthropic-claude)
+- [Google Vertex AI](https://orkes.io/content/integrations/ai-llm/vertex-ai)
+- [Google Gemini AI](https://orkes.io/content/integrations/ai-llm/google-gemini-ai)
+- [Hugging Face](https://orkes.io/content/integrations/ai-llm/hugging-face)
+- [AWS Bedrock Anthropic](https://orkes.io/content/integrations/ai-llm/aws-bedrock-anthropic)
+- [AWS Bedrock Cohere](https://orkes.io/content/integrations/ai-llm/aws-bedrock-cohere)
+- [AWS Bedrock Titan](https://orkes.io/content/integrations/ai-llm/aws-bedrock-titan)
+
+For vector databases, supported providers include:
+
+- [Pinecone](https://orkes.io/content/integrations/vector-databases/pinecone)
+- [Weaviate](https://orkes.io/content/integrations/vector-databases/weaviate)
+- [Postgres Vector Database (pgvector)](https://orkes.io/content/integrations/vector-databases/postgres-vector-database)
+- [Mongo Vector Database (MongoDB Atlas)](https://orkes.io/content/integrations/vector-databases/mongo-vector-database)
+
+Each integration is configured at the cluster level with provider credentials and access to models/indexes. Once configured, the integration and its models are available to reference in AI tasks within the workflows, but only for applications or groups that have been explicitly granted access via RBAC.
+
+## AI Prompt Studio
+
+Orkes Conductor includes a dedicated Prompt Studio for creating, testing, and refining prompt templates. Prompts created here are reusable across any workflow that contains an LLM Text Complete or LLM Chat Complete task.
+
+Prompts support passing dynamic variables using `${variable_name}` syntax. At runtime, these variables are resolved from workflow inputs or the outputs of upstream tasks, allowing a single prompt template to serve different contexts without modification.
 
 ## Learn more
 
