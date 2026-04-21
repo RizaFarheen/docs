@@ -20,22 +20,25 @@ import {
 
 <main className={`mainContainer container`}>
 <NewToConductorSection
-  title="What is Orkes Conductor?"
+  title="Build AI Agents and Workflows: Scale With Confidence."
   description={
     <div>
-      Orkes Conductor is an enterprise-grade orchestration platform for building reliable workflows and AI agents.
+      Orkes Conductor is the battle-tested orchestration platform rooted in open source; with built-in reliability, observability, and control.
       <br/><br/>
-      It provides durable execution for distributed systems, enabling you to orchestrate long-running workflows, coordinate AI agents, and implement event-driven architectures with built-in reliability, observability, and control.
+      Write workers in any language, define your workflows in code or config, and let Conductor handle durable execution at scale.
     </div>
   }
-/>
+  ctaButtons={[
+    { label: "Start for free", href: "https://developer.orkescloud.com", primary: true }
+  ]}
+  />
 <StepBoxesSection
   steps={[
     {
       title: "Getting Started",
       description:
-        "Learn the fundamentals of Orkes Conductor. Set up your environment and build your first workflow.",
-      to: "/category/getting-started ",
+        "Learn the fundamentals of Orkes Conductor. Set up your environment and build your first workflow. Get up and running in minutes.",
+      to: "/content/quickstarts",
     },
     {
       title: "AI Orchestration",
