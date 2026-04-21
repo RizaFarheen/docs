@@ -161,14 +161,6 @@ const accordionData = [
 
 const moreResoucesData = [
   {
-    title: "Blog",
-    description:
-      "Explore technical use cases, community posts, product updates, and more from our team at Orkes",
-    logo: "/content/img/svg/more-resources/blogs.svg",
-    url: "https://orkes.io/blog/",
-    ctaLabel: "Read blogs",
-  },
-  {
     title: "Academy",
     description:
       "Learn workflow orchestration with hands-on labs, structured paths, and certification from Orkes.",
@@ -177,12 +169,20 @@ const moreResoucesData = [
     ctaLabel: "Explore courses",
   },
   {
+    title: "Blog",
+    description:
+      "Technical use cases, community posts, and product updates from the Orkes team.",
+    logo: "/content/img/svg/more-resources/blogs.svg",
+    url: "https://orkes.io/blog/",
+    ctaLabel: "Read blogs",
+  },
+  {
     title: "Developer Events",
     description:
-      "Stay ahead with upcoming developer events, webinars, and workshops from Orkes.",
+      "Upcoming webinars, workshops, and developer events from Orkes.",
     logo: "/content/img/svg/more-resources/dev-events.svg",
     url: "https://orkes.io/events/",
-    ctaLabel: "Check upcoming events ",
+    ctaLabel: "Check upcoming events",
   },
 ];
 export const StepBoxesSection = ({ steps = [] }) => (
@@ -373,11 +373,28 @@ export const CommunitySection = ({}) => (
 export const FirstSection = ({ content }) => (
   <div className={styles.firstSection}>{content}</div>
 );
-export const NewToConductorSection = ({ title, description }) => (
+export const NewToConductorSection = ({ title, description, ctaButtons, socialProof }) => (
   <div className={"row"}>
     <div className="col">
       <h2>{title}</h2>
       <div>{description}</div>
+      {ctaButtons && (
+        <div className={styles.ctaButtons}>
+          {ctaButtons.map((btn, i) => (
+            <a
+              key={i}
+              href={btn.href}
+              className={`button button--lg ${btn.primary ? styles.ctaPrimary : styles.ctaSecondary}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {btn.label}
+              {btn.primary && <span className={styles.ctaArrow}>→</span>}
+            </a>
+          ))}
+        </div>
+      )}
+      {socialProof && <p className={styles.socialProof}>{socialProof}</p>}
     </div>
   </div>
 );

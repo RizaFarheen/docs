@@ -112,6 +112,34 @@
   object-fit: contain;
 }
 
+.ctaButtons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.ctaPrimary {
+  background-color: var(--ifm-color-info);
+  border: none;
+  color: #fff !important;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ctaPrimary:hover {
+  background-color: var(--ifm-color-info-dark);
+  color: #fff !important;
+  text-decoration: none;
+}
+
+.ctaArrow {
+  font-size: 1.1em;
+}
+
 @media screen and (max-width: 996px) {
   .mobileSpaced {
     margin-top: 1rem;
