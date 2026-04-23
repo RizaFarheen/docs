@@ -112,12 +112,10 @@
   object-fit: contain;
 }
 
-.ctaButtons {
+.bottomCta {
   display: flex;
   justify-content: center;
-  gap: 12px;
-  margin-top: 1.5rem;
-  flex-wrap: wrap;
+  padding: 2.5rem 0 1rem;
 }
 
 .ctaPrimary {

@@ -373,29 +373,25 @@ export const CommunitySection = ({}) => (
 export const FirstSection = ({ content }) => (
   <div className={styles.firstSection}>{content}</div>
 );
-export const NewToConductorSection = ({ title, description, ctaButtons, socialProof }) => (
+export const NewToConductorSection = ({ title, description }) => (
   <div className={"row"}>
     <div className="col">
       <h2>{title}</h2>
       <div>{description}</div>
-      {ctaButtons && (
-        <div className={styles.ctaButtons}>
-          {ctaButtons.map((btn, i) => (
-            <a
-              key={i}
-              href={btn.href}
-              className={`button button--lg ${btn.primary ? styles.ctaPrimary : styles.ctaSecondary}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {btn.label}
-              {btn.primary && <span className={styles.ctaArrow}>→</span>}
-            </a>
-          ))}
-        </div>
-      )}
-      {socialProof && <p className={styles.socialProof}>{socialProof}</p>}
     </div>
+  </div>
+);
+
+export const BottomCtaSection = () => (
+  <div className={styles.bottomCta}>
+    <a
+      href="https://developer.orkescloud.com"
+      className={`button button--lg ${styles.ctaPrimary}`}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Start for free <span className={styles.ctaArrow}>→</span>
+    </a>
   </div>
 );
 
