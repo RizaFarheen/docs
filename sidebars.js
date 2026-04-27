@@ -323,233 +323,350 @@ const sidebars = {
             items: [
                 {
                     type: 'category',
-                    label: 'AI / LLM',
+                    label: 'Connections and Resources',
                     link: {
                         type: 'generated-index',
-                        title: 'AI / LLM Integrations',
-                        slug: '/category/integrations/ai-llm',
-                        description: 'Learn how to connect your Conductor cluster to AI and LLM providers and configure models for use in AI-powered workflows.',
+                        title: 'Connections and Resources',
+                        slug: '/category/integrations/connections-and-resources',
+                        description: 'Learn how to set up connections and configure resources for AI providers, vector databases, message brokers, cloud platforms, databases, and external services.',
                     },
                     items: [
                         {
-                            type: 'doc',
-                            id: 'integrations/ai-llm/ollama',
-                            label: 'Ollama',
+                            type: 'category',
+                            label: 'AI / LLM',
+                            link: {
+                                type: 'generated-index',
+                                title: 'AI / LLM Integrations',
+                                slug: '/category/integrations/ai-llm',
+                                description: 'Learn how to connect your Conductor cluster to AI and LLM providers and configure models for use in AI-powered workflows.',
+                            },
+                            items: [
+                                {
+                                    type: 'doc',
+                                    id: 'integrations/ai-llm/ollama',
+                                    label: 'Ollama',
+                                },
+                                {
+                                    type: 'doc',
+                                    id: 'integrations/ai-llm/azure-open-ai',
+                                    label: 'Azure Open AI',
+                                },
+                                {
+                                    type: 'doc',
+                                    id: 'integrations/ai-llm/open-ai',
+                                    label: 'Open AI',
+                                },
+                                {
+                                    type: 'doc',
+                                    id: 'integrations/ai-llm/perplexity',
+                                    label: 'Perplexity',
+                                },
+                                {
+                                    type: 'doc',
+                                    id: 'integrations/ai-llm/grok',
+                                    label: 'Grok',
+                                },
+                                {
+                                    type: 'doc',
+                                    id: 'integrations/ai-llm/cohere',
+                                    label: 'Cohere',
+                                },
+                                {
+                                    type: 'doc',
+                                    id: 'integrations/ai-llm/mistral',
+                                    label: 'Mistral',
+                                },
+                                {
+                                    type: 'doc',
+                                    id: 'integrations/ai-llm/anthropic-claude',
+                                    label: 'Anthropic Claude',
+                                },
+                                {
+                                    type: 'doc',
+                                    id: 'integrations/ai-llm/vertex-ai',
+                                    label: 'Google Vertex AI',
+                                },
+                                {
+                                    type: 'doc',
+                                    id: 'integrations/ai-llm/google-gemini-ai',
+                                    label: 'Google Gemini AI',
+                                },
+                                {
+                                    type: 'doc',
+                                    id: 'integrations/ai-llm/hugging-face',
+                                    label: 'Hugging Face',
+                                },
+                                {
+                                    type: 'doc',
+                                    id: 'integrations/ai-llm/aws-bedrock-anthropic',
+                                    label: 'AWS Bedrock Anthropic',
+                                },
+                                {
+                                    type: 'doc',
+                                    id: 'integrations/ai-llm/aws-bedrock-cohere',
+                                    label: 'AWS Bedrock Cohere',
+                                },
+                                {
+                                    type: 'doc',
+                                    id: 'integrations/ai-llm/aws-bedrock-titan',
+                                    label: 'AWS Bedrock Titan',
+                                },
+                            ],
                         },
                         {
-                            type: 'doc',
-                            id: 'integrations/ai-llm/azure-open-ai',
-                            label: 'Azure Open AI',
+                            type: 'category',
+                            label: 'Vector Databases',
+                            link: {
+                                type: 'generated-index',
+                                title: 'Vector Databases Integrations',
+                                slug: '/category/integrations/vector-databases',
+                                description: 'Learn how to connect vector databases to use embeddings and retrieval features in AI workflows.',
+                            },
+                            items: [
+                                {
+                                    type: 'doc',
+                                    id: 'integrations/vector-databases/pinecone',
+                                    label: 'Pinecone',
+                                },
+                                {
+                                    type: 'doc',
+                                    id: 'integrations/vector-databases/weaviate',
+                                    label: 'Weaviate',
+                                },
+                                {
+                                    type: 'doc',
+                                    id: 'integrations/vector-databases/postgres-vector-database',
+                                    label: 'Postgres Vector Database',
+                                },
+                                {
+                                    type: 'doc',
+                                    id: 'integrations/vector-databases/mongo-vector-database',
+                                    label: 'Mongo Vector Database',
+                                },
+                            ],
                         },
                         {
-                            type: 'doc',
-                            id: 'integrations/ai-llm/open-ai',
-                            label: 'Open AI',
+                            type: 'category',
+                            label: 'Message Broker',
+                            link: {
+                                type: 'generated-index',
+                                title: 'Message Broker Integrations',
+                                slug: '/category/integrations/message-broker',
+                                description: 'Learn how to connect message brokers to publish events and trigger workflows from external systems.',
+                            },
+                            items: [
+                                {
+                                    type: 'doc',
+                                    id: 'integrations/message-broker/amqp',
+                                    label: 'AMQP',
+                                },
+                                {
+                                    type: 'doc',
+                                    id: 'integrations/message-broker/amazon-msk',
+                                    label: 'Amazon MSK',
+                                },
+                                {
+                                    type: 'doc',
+                                    id: 'integrations/message-broker/confluent-kafka',
+                                    label: 'Confluent Kafka',
+                                },
+                                {
+                                    type: 'doc',
+                                    id: 'integrations/message-broker/apache-kafka',
+                                    label: 'Apache Kafka',
+                                },
+                                {
+                                    type: 'doc',
+                                    id: 'integrations/message-broker/nats-messaging',
+                                    label: 'NATS Messaging',
+                                },
+                                {
+                                    type: 'doc',
+                                    id: 'integrations/message-broker/aws-sqs',
+                                    label: 'AWS SQS',
+                                },
+                                {
+                                    type: 'doc',
+                                    id: 'integrations/message-broker/azure-service-bus',
+                                    label: 'Azure Service Bus',
+                                },
+                                {
+                                    type: 'doc',
+                                    id: 'integrations/message-broker/gcp-pub-sub',
+                                    label: 'GCP Pub Sub',
+                                },
+                                {
+                                    type: 'doc',
+                                    id: 'integrations/message-broker/ibm-mq',
+                                    label: 'IBM MQ',
+                                },
+                            ],
                         },
                         {
-                            type: 'doc',
-                            id: 'integrations/ai-llm/perplexity',
-                            label: 'Perplexity',
+                            type: 'category',
+                            label: 'Cloud Providers',
+                            link: {
+                                type: 'generated-index',
+                                title: 'Cloud Providers',
+                                slug: '/category/integrations/cloud-provider',
+                                description: 'Learn how to connect cloud providers to allow workflows to access cloud resources such as storage buckets and files.',
+                            },
+                            items: [
+                                {
+                                    type: 'doc',
+                                    id: 'integrations/cloud-provider/aws',
+                                    label: 'AWS',
+                                },
+                                {
+                                    type: 'doc',
+                                    id: 'integrations/cloud-provider/gcp',
+                                    label: 'GCP',
+                                },
+                            ],
                         },
                         {
-                            type: 'doc',
-                            id: 'integrations/ai-llm/grok',
-                            label: 'Grok',
+                            type: 'category',
+                            label: 'RDBMS',
+                            link: {
+                                type: 'generated-index',
+                                title: 'RDBMS Integrations',
+                                slug: '/category/integrations/rdbms',
+                                description: 'Learn how to connect relational databases so workflows can query and manage data using database integrations.',
+                            },
+                            items: [
+                                {
+                                    type: 'doc',
+                                    id: 'integrations/rdbms/relational-database',
+                                    label: 'Relational Database',
+                                },
+                            ],
                         },
                         {
-                            type: 'doc',
-                            id: 'integrations/ai-llm/cohere',
-                            label: 'Cohere',
-                        },
-                        {
-                            type: 'doc',
-                            id: 'integrations/ai-llm/mistral',
-                            label: 'Mistral',
-                        },
-                        {
-                            type: 'doc',
-                            id: 'integrations/ai-llm/anthropic-claude',
-                            label: 'Anthropic Claude',
-                        },
-                        {
-                            type: 'doc',
-                            id: 'integrations/ai-llm/vertex-ai',
-                            label: 'Google Vertex AI',
-                        },
-                        {
-                            type: 'doc',
-                            id: 'integrations/ai-llm/google-gemini-ai',
-                            label: 'Google Gemini AI',
-                        },
-                        {
-                            type: 'doc',
-                            id: 'integrations/ai-llm/hugging-face',
-                            label: 'Hugging Face',
-                        },
-                        {
-                            type: 'doc',
-                            id: 'integrations/ai-llm/aws-bedrock-anthropic',
-                            label: 'AWS Bedrock Anthropic',
-                        },
-                        {
-                            type: 'doc',
-                            id: 'integrations/ai-llm/aws-bedrock-cohere',
-                            label: 'AWS Bedrock Cohere',
-                        },
-                        {
-                            type: 'doc',
-                            id: 'integrations/ai-llm/aws-bedrock-titan',
-                            label: 'AWS Bedrock Titan',
+                            type: 'category',
+                            label: 'Email/Git',
+                            link: {
+                                type: 'generated-index',
+                                title: 'Email/Git',
+                                slug: '/category/integrations/email',
+                                description: 'Learn how to integrate email providers and Git repositories so workflows can send emails and access files stored in source control.',
+                            },
+                            items: [
+                                {
+                                    type: 'doc',
+                                    id: 'integrations/sendgrid',
+                                    label: 'SendGrid Email',
+                                },
+                                {
+                                    type: 'doc',
+                                    id: 'integrations/git',
+                                    label: 'Git Repository',
+                                },
+                            ],
                         },
                     ],
                 },
                 {
                     type: 'category',
-                    label: 'Vector Databases',
+                    label: 'Connected Apps',
                     link: {
                         type: 'generated-index',
-                        title: 'Vector Databases Integrations',
-                        slug: '/category/integrations/vector-databases',
-                        description: 'Learn how to connect vector databases to use embeddings and retrieval features in AI workflows.',
+                        title: 'Connected Apps',
+                        slug: '/category/integrations/connected-apps',
+                        description: 'Learn how to connect third-party applications to extend Conductor workflows.',
                     },
                     items: [
                         {
-                            type: 'doc',
-                            id: 'integrations/vector-databases/pinecone',
-                            label: 'Pinecone',
+                            type: 'category',
+                            label: 'Productivity',
+                            link: {
+                                type: 'generated-index',
+                                title: 'Productivity',
+                                slug: '/category/integrations/productivity',
+                                description: 'Learn how to connect productivity tools to automate tasks across your workflows.',
+                            },
+                            items: [
+                                {
+                                    type: 'doc',
+                                    id: 'integrations/connected-apps/productivity/notion',
+                                    label: 'Notion',
+                                },
+                                {
+                                    type: 'doc',
+                                    id: 'integrations/connected-apps/productivity/google-calendar',
+                                    label: 'Google Calendar',
+                                },
+                                {
+                                    type: 'doc',
+                                    id: 'integrations/connected-apps/productivity/google-drive',
+                                    label: 'Google Drive',
+                                },
+                                {
+                                    type: 'doc',
+                                    id: 'integrations/connected-apps/productivity/google-slides',
+                                    label: 'Google Slides',
+                                },
+                                {
+                                    type: 'doc',
+                                    id: 'integrations/connected-apps/productivity/google-docs',
+                                    label: 'Google Docs',
+                                },
+                                {
+                                    type: 'doc',
+                                    id: 'integrations/connected-apps/productivity/google-sheets',
+                                    label: 'Google Sheets',
+                                },
+                            ],
                         },
                         {
-                            type: 'doc',
-                            id: 'integrations/vector-databases/weaviate',
-                            label: 'Weaviate',
+                            type: 'category',
+                            label: 'CMS',
+                            link: {
+                                type: 'generated-index',
+                                title: 'CMS',
+                                slug: '/category/integrations/cms',
+                                description: 'Learn how to connect CMS platforms to manage and publish content through workflows.',
+                            },
+                            items: [
+                                {
+                                    type: 'doc',
+                                    id: 'integrations/connected-apps/cms/wordpress',
+                                    label: 'WordPress',
+                                },
+                            ],
                         },
                         {
-                            type: 'doc',
-                            id: 'integrations/vector-databases/postgres-vector-database',
-                            label: 'Postgres Vector Database',
+                            type: 'category',
+                            label: 'Project Management',
+                            link: {
+                                type: 'generated-index',
+                                title: 'Project Management',
+                                slug: '/category/integrations/project-management',
+                                description: 'Learn how to connect project management tools to coordinate tasks and automate team workflows.',
+                            },
+                            items: [
+                                {
+                                    type: 'doc',
+                                    id: 'integrations/connected-apps/project-management/discourse',
+                                    label: 'Discourse',
+                                },
+                            ],
                         },
                         {
-                            type: 'doc',
-                            id: 'integrations/vector-databases/mongo-vector-database',
-                            label: 'Mongo Vector Database',
-                        },
-                    ],
-                },
-                {
-                    type: 'category',
-                    label: 'Message Broker',
-                    link: {
-                        type: 'generated-index',
-                        title: 'Message Broker Integrations',
-                        slug: '/category/integrations/message-broker',
-                        description: 'Learn how to connect message brokers to publish events and trigger workflows from external systems.',
-                    },
-                    items: [
-                        {
-                            type: 'doc',
-                            id: 'integrations/message-broker/amqp',
-                            label: 'AMQP',
-                        },
-                        {
-                            type: 'doc',
-                            id: 'integrations/message-broker/amazon-msk',
-                            label: 'Amazon MSK',
-                        },
-                        {
-                            type: 'doc',
-                            id: 'integrations/message-broker/confluent-kafka',
-                            label: 'Confluent Kafka',
-                        },
-                        {
-                            type: 'doc',
-                            id: 'integrations/message-broker/apache-kafka',
-                            label: 'Apache Kafka',
-                        },
-                        {
-                            type: 'doc',
-                            id: 'integrations/message-broker/nats-messaging',
-                            label: 'NATS Messaging',
-                        },
-                        {
-                            type: 'doc',
-                            id: 'integrations/message-broker/aws-sqs',
-                            label: 'AWS SQS',
-                        },
-                        {
-                            type: 'doc',
-                            id: 'integrations/message-broker/azure-service-bus',
-                            label: 'Azure Service Bus',
-                        },
-                        {
-                            type: 'doc',
-                            id: 'integrations/message-broker/gcp-pub-sub',
-                            label: 'GCP Pub Sub',
-                        },
-                        {
-                            type: 'doc',
-                            id: 'integrations/message-broker/ibm-mq',
-                            label: 'IBM MQ',
-                        },
-                    ],
-                },
-                {
-                    type: 'category',
-                    label: 'Cloud Providers',
-                    link: {
-                        type: 'generated-index',
-                        title: 'Cloud Providers',
-                        slug: '/category/integrations/cloud-provider',
-                        description: 'Learn how to connect cloud providers to allow workflows to access cloud resources such as storage buckets and files.',
-                    },
-                    items: [
-                        {
-                            type: 'doc',
-                            id: 'integrations/cloud-provider/aws',
-                            label: 'AWS',
-                        },
-                        {
-                            type: 'doc',
-                            id: 'integrations/cloud-provider/gcp',
-                            label: 'GCP',
-                        },
-                    ],
-                },
-                {
-                    type: 'category',
-                    label: 'RDBMS',
-                    link: {
-                        type: 'generated-index',
-                        title: 'RDBMS Integrations',
-                        slug: '/category/integrations/rdbms',
-                        description: 'Learn how to connect relational databases so workflows can query and manage data using database integrations.',
-                    },
-                    items: [
-                        {
-                            type: 'doc',
-                            id: 'integrations/rdbms/relational-database',
-                            label: 'Relational Database',
-                        },
-                    ],
-                },
-                {
-                    type: 'category',
-                    label: 'Email/Git',
-                    link: {
-                        type: 'generated-index',
-                        title: 'Email/Git',
-                        slug: '/category/integrations/email',
-                        description: 'Learn how to integrate email providers and Git repositories so workflows can send emails and access files stored in source control.',
-                    },
-                    items: [
-                        {
-                            type: 'doc',
-                            id: 'integrations/sendgrid',
-                            label: 'SendGrid Email',
-                        },
-                        {
-                            type: 'doc',
-                            id: 'integrations/git',
-                            label: 'Git Repository',
+                            type: 'category',
+                            label: 'Community',
+                            link: {
+                                type: 'generated-index',
+                                title: 'Community',
+                                slug: '/category/integrations/community',
+                                description: 'Learn how to connect community platforms to automate engagement and outreach workflows.',
+                            },
+                            items: [
+                                {
+                                    type: 'doc',
+                                    id: 'integrations/connected-apps/community/common-room',
+                                    label: 'Common Room',
+                                },
+                            ],
                         },
                     ],
                 },
