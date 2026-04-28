@@ -317,7 +317,7 @@ const sidebars = {
                 type: 'generated-index',
                 title: 'Integrations',
                 slug: '/category/integrations',
-                description: 'Learn how to connect Conductor with AI providers, vector databases, message brokers, cloud platforms, databases, and external services.',
+                description: 'Learn how to set up connections and resources for AI providers, vector databases, message brokers, cloud platforms, and databases, and connect third-party apps to extend your Conductor workflows.',
             },
             className: 'leftMenuHeader',
             items: [
