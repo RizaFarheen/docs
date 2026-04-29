@@ -586,34 +586,76 @@ const sidebars = {
                             },
                             items: [
                                 {
-                                    type: 'doc',
-                                    id: 'integrations/connected-apps/productivity/notion',
+                                    type: 'category',
                                     label: 'Notion',
+                                    link: { type: 'doc', id: 'integrations/connected-apps/productivity/notion' },
+                                    items: [
+                                        {
+                                            type: 'doc',
+                                            id: 'integrations/connected-apps/productivity/notion-operations',
+                                            label: 'Notion Operations Reference',
+                                        },
+                                    ],
                                 },
                                 {
-                                    type: 'doc',
-                                    id: 'integrations/connected-apps/productivity/google-calendar',
+                                    type: 'category',
                                     label: 'Google Calendar',
+                                    link: { type: 'doc', id: 'integrations/connected-apps/productivity/google-calendar' },
+                                    items: [
+                                        {
+                                            type: 'doc',
+                                            id: 'integrations/connected-apps/productivity/google-calendar-operations',
+                                            label: 'Google Calendar Operations Reference',
+                                        },
+                                    ],
                                 },
                                 {
-                                    type: 'doc',
-                                    id: 'integrations/connected-apps/productivity/google-drive',
+                                    type: 'category',
                                     label: 'Google Drive',
+                                    link: { type: 'doc', id: 'integrations/connected-apps/productivity/google-drive' },
+                                    items: [
+                                        {
+                                            type: 'doc',
+                                            id: 'integrations/connected-apps/productivity/google-drive-operations',
+                                            label: 'Google Drive Operations Reference',
+                                        },
+                                    ],
                                 },
                                 {
-                                    type: 'doc',
-                                    id: 'integrations/connected-apps/productivity/google-slides',
+                                    type: 'category',
                                     label: 'Google Slides',
+                                    link: { type: 'doc', id: 'integrations/connected-apps/productivity/google-slides' },
+                                    items: [
+                                        {
+                                            type: 'doc',
+                                            id: 'integrations/connected-apps/productivity/google-slides-operations',
+                                            label: 'Google Slides Operations Reference',
+                                        },
+                                    ],
                                 },
                                 {
-                                    type: 'doc',
-                                    id: 'integrations/connected-apps/productivity/google-docs',
+                                    type: 'category',
                                     label: 'Google Docs',
+                                    link: { type: 'doc', id: 'integrations/connected-apps/productivity/google-docs' },
+                                    items: [
+                                        {
+                                            type: 'doc',
+                                            id: 'integrations/connected-apps/productivity/google-docs-operations',
+                                            label: 'Google Docs Operations Reference',
+                                        },
+                                    ],
                                 },
                                 {
-                                    type: 'doc',
-                                    id: 'integrations/connected-apps/productivity/google-sheets',
+                                    type: 'category',
                                     label: 'Google Sheets',
+                                    link: { type: 'doc', id: 'integrations/connected-apps/productivity/google-sheets' },
+                                    items: [
+                                        {
+                                            type: 'doc',
+                                            id: 'integrations/connected-apps/productivity/google-sheets-operations',
+                                            label: 'Google Sheets Operations Reference',
+                                        },
+                                    ],
                                 },
                             ],
                         },
@@ -628,9 +670,16 @@ const sidebars = {
                             },
                             items: [
                                 {
-                                    type: 'doc',
-                                    id: 'integrations/connected-apps/cms/wordpress',
+                                    type: 'category',
                                     label: 'WordPress',
+                                    link: { type: 'doc', id: 'integrations/connected-apps/cms/wordpress' },
+                                    items: [
+                                        {
+                                            type: 'doc',
+                                            id: 'integrations/connected-apps/cms/wordpress-operations',
+                                            label: 'WordPress Operations Reference',
+                                        },
+                                    ],
                                 },
                             ],
                         },
@@ -645,9 +694,16 @@ const sidebars = {
                             },
                             items: [
                                 {
-                                    type: 'doc',
-                                    id: 'integrations/connected-apps/project-management/discourse',
+                                    type: 'category',
                                     label: 'Discourse',
+                                    link: { type: 'doc', id: 'integrations/connected-apps/project-management/discourse' },
+                                    items: [
+                                        {
+                                            type: 'doc',
+                                            id: 'integrations/connected-apps/project-management/discourse-operations',
+                                            label: 'Discourse Operations Reference',
+                                        },
+                                    ],
                                 },
                             ],
                         },
@@ -662,9 +718,16 @@ const sidebars = {
                             },
                             items: [
                                 {
-                                    type: 'doc',
-                                    id: 'integrations/connected-apps/community/common-room',
+                                    type: 'category',
                                     label: 'Common Room',
+                                    link: { type: 'doc', id: 'integrations/connected-apps/community/common-room' },
+                                    items: [
+                                        {
+                                            type: 'doc',
+                                            id: 'integrations/connected-apps/community/common-room-operations',
+                                            label: 'Common Room Operations Reference',
+                                        },
+                                    ],
                                 },
                             ],
                         },
