@@ -161,6 +161,14 @@ const accordionData = [
 
 const moreResoucesData = [
   {
+    title: "Changelog",
+    description:
+      "See what's new in Orkes Conductor: features, enhancements, and product updates.",
+    logo: "/content/img/svg/more-resources/changelog.svg",
+    url: "https://www.orkes.io/changelog",
+    ctaLabel: "View changelog",
+  },
+  {
     title: "Academy",
     description:
       "Learn workflow orchestration with hands-on labs, structured paths, and certification from Orkes.",
@@ -175,14 +183,6 @@ const moreResoucesData = [
     logo: "/content/img/svg/more-resources/blogs.svg",
     url: "https://orkes.io/blog/",
     ctaLabel: "Read blogs",
-  },
-  {
-    title: "Developer Events",
-    description:
-      "Upcoming webinars, workshops, and developer events from Orkes.",
-    logo: "/content/img/svg/more-resources/dev-events.svg",
-    url: "https://orkes.io/events/",
-    ctaLabel: "Check upcoming events",
   },
 ];
 export const StepBoxesSection = ({ steps = [] }) => (
