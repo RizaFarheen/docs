@@ -1,0 +1,58 @@
+---
+sidebar_position: 10
+slug: "/reference-docs/api/integrations/add-tags-to-integration-resource"
+description: "Learn how to add a tag to an integration provider."
+---
+
+# Add Tags to Integration Resource
+
+**Endpoint**: `PUT /api/integrations/provider/{name}/integration/{integration_name}/tags`
+
+Adds tags to an integration resource. 
+
+## Path parameters
+
+| Parameter | Description                                      | Type   | Required/ Optional |
+| --------- | ------------------------------------------------ | ------ | ------------------ |
+| name | The name of the integration which contains the resources. This is the integration name, not the provider name. For example, if you have created an OpenAI integration named `openAI`, use `openAI`. | string | Required. | 
+| integration_name | The name of the specific resource to which tags are to be added, which can be:<ul><li>the model name for AI/LLMs</li><li>the index name for databases</li><li>the table name for RDBMS</li></ul> | string | Required. | 
+
+## Request Body
+
+The request body should be an array of tag objects.
+
+| Parameter | Description                                      | Type   | Required/ Optional |
+| --------- | ------------------------------------------------ | ------ | ------------------ |
+| key | The tag key. | string | Required. | 
+| value | The tag value. | string | Required. | 
+
+## Response
+
+Returns 200 OK, indicating that tags have been added to the resource.
+
+## Examples
+
+<details>
+<summary>Add a tag to an integration resource</summary>
+
+**Request**
+
+```shell
+curl -X 'PUT' \
+  'https://<YOUR-SERVER-URL>/api/integrations/provider/openAI/integration/gpt-4o/tags' \
+  -H 'accept: */*' \
+  -H 'X-Authorization: <TOKEN>' \
+  -H 'Content-Type: application/json' \
+  -d '[
+  {
+    "key": "test",
+    "value": "tag"
+  }
+]'
+```
+
+**Response**
+
+Returns 200 OK, indicating that the tag has been added to the resource.
+
+</details>
