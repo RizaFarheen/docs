@@ -1,0 +1,41 @@
+---
+sidebar_position: 3
+slug: "/reference-docs/api/integrations/delete-integration-provider"
+description: "Learn how to delete an integration provider."
+---
+
+# Delete Integration Provider
+
+**Endpoint**: `DELETE /api/integrations/provider/{name}`
+
+Deletes an integration provider from Conductor cluster.
+
+## Path parameters
+
+| Parameter | Description                                      | Type   | Required/ Optional |
+| --------- | ------------------------------------------------ | ------ | ------------------ |
+| name | The name of the integration to delete. | string | Required. | 
+
+## Response
+
+Returns 200 OK, indicating that the integration has been deleted.
+
+## Examples
+
+<details>
+<summary>Delete an integration provider</summary>
+
+**Request**
+
+```shell
+curl -X 'DELETE' \
+  'https://<YOUR-SERVER-URL>/api/integrations/provider/openAI-marketing' \
+  -H 'accept: */*' \
+  -H 'X-Authorization: <TOKEN>'
+```
+
+**Response**
+
+Returns 200 OK, indicating that the integration has been deleted.
+
+</details>
