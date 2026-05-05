@@ -119,10 +119,10 @@ Create a Python worker by adding a @worker_task decorator to a function.
 from conductor.client.worker.worker_task import worker_task
 
 @worker_task(task_definition_name='myTask')
-def greet(name: str) -> str:
-    return f'Hello {name}'
+def worker(name: str) -> str:
+    return f'hello, {name}'
 ```
-Check out the full sample worker project in Python: https://github.com/conductor-oss/conductor-apps/tree/main/python/developer-guides/using-workers
+Check out the full sample worker project in Python: https://github.com/conductor-oss/awesome-conductor-apps/tree/main/python/developer-guides/using-workers
 
 </TabItem>
 
@@ -142,7 +142,7 @@ public class Workers {
 }
 ```
 
-Check out the full sample worker project in Java: https://github.com/conductor-oss/conductor-apps/tree/main/java/developer-guides/using-workers
+Check out the full sample worker project in Java: https://github.com/conductor-oss/awesome-conductor-apps/tree/main/java/developer-guides/using-workers
 
 </TabItem>
 
@@ -163,14 +163,14 @@ const worker = {
 };
 ```
 
-Check out the full sample worker project in JavaScript: https://github.com/conductor-oss/conductor-apps/tree/main/javascript/developer-guides/using-workers
+Check out the full sample worker project in JavaScript: https://github.com/conductor-oss/awesome-conductor-apps/tree/main/javascript/developer-guides/using-workers
 
 </TabItem>
 
 <TabItem value="csharp" label="C#">
 
 ``` csharp
-[WorkerTask(taskType: "myTask", batchSize: 5, pollIntervalMs: 500, workerId: "csharp-worker")]
+[WorkerTask(taskType: "myTask", batchSize: 5, pollIntervalMs: 500, workerId: "sample-csharp-worker")]
 public static TaskResult MyTask(Conductor.Client.Models.Task task)
 {
     var inputData = task.InputData;
@@ -183,7 +183,7 @@ public static TaskResult MyTask(Conductor.Client.Models.Task task)
 }
 ```
 
-Check out the full sample worker project in C#: https://github.com/conductor-oss/conductor-apps/tree/main/csharp/developer-guides/using-workers
+Check out the full sample worker project in C#: https://github.com/conductor-oss/awesome-conductor-apps/tree/main/csharp/developer-guides/using-workers
 
 </TabItem>
 
@@ -203,7 +203,7 @@ func myTask(task *model.Task) (interface{}, error) {
 }
 ```
 
-Check out the full sample worker project in Go: https://github.com/conductor-oss/conductor-apps/tree/main/go/developer-guides/using-workers
+Check out the full sample worker project in Go: https://github.com/conductor-oss/awesome-conductor-apps/tree/main/go/developer-guides/using-workers
 
 
 </TabItem>
@@ -222,13 +222,20 @@ Run the Python worker by calling a TaskHandler.
 ``` python
 from conductor.client.automator.task_handler import TaskHandler
 from conductor.client.configuration.configuration import Configuration
+from conductor.client.configuration.settings.authentication_settings import AuthenticationSettings
+from worker import *
 
-task_handler = TaskHandler(configuration=Configuration())
+configuration = Configuration(
+    base_url='https://SERVER_URL',  # e.g., https://developer.orkescloud.com
+    authentication_settings=AuthenticationSettings(key_id='_CHANGE_ME_', key_secret='_CHANGE_ME_')
+)
+
+task_handler = TaskHandler(
+    configuration=configuration,
+    scan_for_annotated_workers=True
+)
 task_handler.start_processes()
-task_handler.join_processes()
 ```
-
-`task_handler.join_processes()` blocks the main thread indefinitely, keeping the worker running until the process is killed. To stop the worker gracefully (for example, in response to a shutdown signal), call `task_handler.stop_processes()` instead.
 
 </TabItem>
 
@@ -307,7 +314,7 @@ import (
 
 apiClient := client.NewAPIClient(
     settings.NewAuthenticationSettings(
-        KEY,
+        KEY_ID,
         SECRET,
     ),
     settings.NewHttpSettings(
@@ -315,7 +322,7 @@ apiClient := client.NewAPIClient(
 ))
 
 taskRunner = worker.NewTaskRunnerWithApiClient(apiClient)
-taskRunner.StartWorker("myTask", myTask, 1, time.Second*1)
+taskRunner.StartWorker("myTask", myTask, 1, time.Millisecond*200)
 ```
 
 </TabItem>

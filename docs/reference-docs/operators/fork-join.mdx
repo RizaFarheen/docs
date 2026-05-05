@@ -28,7 +28,7 @@ The [Join](./join) task will run after the forked tasks. Configure the Join task
 
 | Parameter  | Description                                                                                                      | Required/ Optional |
 | ---------- | ---------------------------------------------------------------------------------------------------------------- | ------------------ |
-| joinOn     | A list of task reference names that the Join task will wait for completion before proceeding with the next task. <br/><br/>**Notes**: When a Join task is used after a [Switch](https://orkes.io/content/reference-docs/operators/switch) task, the Join task can complete when the Switch task completes, even if the tasks within the switch branches have not finished. To handle this, add a task such as [Set Variable](https://orkes.io/content/reference-docs/operators/set-variable) at the end of the outermost Switch task and configure the Join task to join on that task. This ensures the Join task waits until all switch branch execution is complete before the workflow continues. | Required.          |
+| joinOn     | A list of task reference names that the Join task will wait for completion before proceeding with the next task. | Required.          |
 | expression | The join script, which controls how the Join task completes if specified.                                        | Optional.          |
 
 ## Task configuration
@@ -81,6 +81,11 @@ The Fork task does not produce output. The Join task returns a map containing th
 4. Select the Join task and configure its settings to complete the fork/join operations.
 
 <p><img src="/content/img/ui-guide-fork-join.png" alt="Screenshot of Fork/Join Task in Orkes Conductor"/></p>
+
+:::info Notes
+- When a Join task is used after a [Switch](/content/reference-docs/operators/switch) task, the Join task can complete when the Switch task completes, even if the tasks within the switch branches have not finished. To handle this, add a task such as [Set Variable](https://orkes.io/content/reference-docs/operators/set-variable) at the end of the outermost Switch task and configure the Join task to join on that task. This ensures the Join task waits until all switch branch execution is complete before the workflow continues.
+- If a fork branch containing a [Sub Workflow task](/content/reference-docs/operators/sub-workflow) fails, sibling tasks in other branches are cancelled and the parent workflow moves to a FAILED state. When the failed sub-workflow is retried, all cancelled sibling tasks are automatically rescheduled and the parent workflow resumes to RUNNING.
+:::
 
 ## Examples
 

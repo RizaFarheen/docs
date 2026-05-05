@@ -24,6 +24,8 @@ Examples include:
 * Scanning of S3 or Blob storage daily to verify compliance with policies.
 * Monitoring the health of a server, such as every 30 seconds.
 
+Non-admin users can only view and interact with schedules they have READ access to. Creators are automatically granted full access to schedules they create.
+
 ## Schedule parameters
 
 Configure these parameters when creating a schedule.
@@ -209,6 +211,33 @@ To get the scheduled workflow execution details as code in the UI, select the ar
 This will display the execution search data in cURL and JavaScript.
 
 <p align="center"><img src="/content/img/scheduler-execution-search-data-code.png" alt="Scheduler search execution search data in code" width="100%" height="auto"></img></p>
+
+## Troubleshooting schedules
+
+**Auto-pause on permission loss**
+
+Orkes Conductor automatically pauses a schedule if the schedule creator loses EXECUTE permission on the associated workflow. This is a security measure to prevent unauthorized workflow executions.
+
+**Identifying an auto-paused schedule**
+
+To confirm a schedule was paused due to a permission loss, retrieve the schedule using the API:
+
+```
+GET /api/scheduler/schedules/{name}
+```
+
+In the response, check the `pausedReason` field. If the schedule was auto-paused due to a security violation, the value will follow this format:
+
+```
+Security Error: <message>
+```
+
+**Resolving an auto-paused schedule**
+
+**To resume the schedule:**
+
+1. Restore EXECUTE permission on the workflow for the schedule's creator.
+2. Manually resume the schedule.
 
 <FAQStructuredData faqs={faqs} />
 
