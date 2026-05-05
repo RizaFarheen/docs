@@ -145,7 +145,7 @@ def main():
     # Create the workflow definition.
     workflow = ConductorWorkflow(
         executor=executor,
-        name='myFirstWorkflow',
+        name='helloWorld',
         description='Workflow that greets a user. Uses a Switch task, HTTP task, and Simple task.',
         version=1
     )
@@ -153,7 +153,7 @@ def main():
     # Create the tasks.
     httpTask = HttpTask('get-user_ref', {'uri': 'https://randomuser.me/api/'})
     switchTask = SwitchTask('user-criteria_ref', '${get-user_ref.output.response.body.results[0].location.country}').switch_case(
-        'United States', SimpleTask('helloWorld', 'simple_ref').input(
+        'United States', SimpleTask('myTask', 'simple_ref').input(
             key='user', value='${get-user_ref.output.response.body.results[0].name.first}'))
 
     # Add the tasks to the workflow using `add` method or the `>>` operator.
@@ -166,7 +166,7 @@ def main():
 
     # Start the workflow.
     request = StartWorkflowRequest()
-    request.name = 'myFirstWorkflow'
+    request.name = 'helloWorld'
     request.version = 1
     id = executor.start_workflow(request)
     print(f"Started workflow {id}")
@@ -209,13 +209,13 @@ public class WorkflowAsCode {
 
         // Create the workflow definition.
         ConductorWorkflow<Object> workflow = new WorkflowBuilder<>(executor)
-                .name("myFirstWorkflow")
+                .name("helloWorld")
                 .version(1)
                 .description("Workflow that greets a user. Uses a Switch task, HTTP task, and Simple task.")
                 .add(new Http("get-user_ref").url("https://randomuser.me/api/"))
                 // This switch task will execute the "helloWorld" task if the user's country is "United States"
                 .add(new Switch("user-criteria_ref", "${get-user_ref.output.response.body.results[0].location.country}")
-                        .switchCase("United States", new SimpleTask("helloWorld", "simple_ref")
+                        .switchCase("United States", new SimpleTask("myTask", "simple_ref")
                                 .input("user", "${get-user_ref.output.response.body.results[0].name.first}")))
                 .build();
 
@@ -262,7 +262,7 @@ const executor = new WorkflowExecutor(client);
 
 // Create the workflow definition.
 const wf = {
-  name: "myFirstWorkflow",
+  name: "helloWorld",
   version: 1,
   description:
     "Workflow that greets a user. Uses a Switch task, HTTP task, and Simple task.",
@@ -273,7 +273,7 @@ const wf = {
       "${get-user_ref.output.response.body.results[0].location.country}",
       {
         "United States": [
-          simpleTask("simple_ref", "helloWorld", {
+          simpleTask("simple_ref", "myTask", {
             user: "${get-user_ref.output.response.body.results[0].name.first}",
           }),
         ],
@@ -320,13 +320,13 @@ var executor = new WorkflowExecutor(conf);
 
 // Create the workflow definition.
 var workflow = new ConductorWorkflow()
-        .WithName("myFirstWorkflow")
+        .WithName("helloWorld")
         .WithDescription("Workflow that greets a user. Uses a Switch task, HTTP task, and Simple task.")
         .WithVersion(1)
         .WithTask(new HttpTask("get-user_ref", new HttpTaskSettings { uri = "https://randomuser.me/api/" }))
         .WithTask(new SwitchTask("user-criteria_ref", "${get-user_ref.output.response.body.results[0].location.country}")
             .WithDecisionCase("United States",
-                [new SimpleTask("helloWorld", "simple_ref").WithInput("user", "${get-user_ref.output.response.body.results[0].name.first}")]));
+                [new SimpleTask("myTask", "simple_ref").WithInput("user", "${get-user_ref.output.response.body.results[0].name.first}")]));
 
 // Register the workflow with overwrite = true.
 executor.RegisterWorkflow(
@@ -378,13 +378,13 @@ var (
 func main() {
 	// Create the workflow definition.
 	wf := workflow.NewConductorWorkflow(workflowExecutor).
-		Name("myFirstWorkflowGo").
+		Name("helloWorld").
 		Version(1).
 		Description("Workflow that greets a user. Uses a Switch task, HTTP task, and Simple task.")
 
 	httpTask := workflow.NewHttpTask("get-user_ref", &workflow.HttpInput{Uri: "https://randomuser.me/api/"})
 	switchTask := workflow.NewSwitchTask("user-criteria_ref", "${get-user_ref.output.response.body.results[0].location.country}").
-		SwitchCase("United States", workflow.NewSimpleTask("helloWorld", "simple_ref").Input("user", "${get-user_ref.output.response.body.results[0].name.first}"))
+		SwitchCase("United States", workflow.NewSimpleTask("myTask", "simple_ref").Input("user", "${get-user_ref.output.response.body.results[0].name.first}"))
 
 	wf.Add(httpTask)
 	wf.Add(switchTask)
@@ -428,7 +428,7 @@ To connect your workflow-as-code project, you must again use an application in C
 
 ``` java
 ApiClient client = ApiClient.builder()
-        .basePath("[https://SERVER_URL/api](https://SERVER_URL/api)") // e.g., “[https://developer.orkescloud.com/api](https://developer.orkescloud.com/api)” for Developer Edition
+        .basePath(“https://SERVER_URL/api”) // e.g., https://developer.orkescloud.com/api for Developer Edition
         .credentials("_CHANGE_ME_", "_CHANGE_ME_")
         .build();
 ```
@@ -444,6 +444,10 @@ Let’s give your first workflow a test run.
 
 :::tip
 Before running the workflow, make sure that your *myTask* worker is actively polling the Conductor server. Otherwise, go back and [start your worker](write-workers#start-the-worker) again.
+:::
+
+:::caution Third-party API dependency
+This workflow fetches data from `randomuser.me`, a public API that can occasionally return empty results. If the Switch task receives an empty response, `switchCaseValue` resolves to undefined and the workflow always routes to `defaultCase`—meaning `myTask` never executes. If your workflow completes without running `myTask`, retry the execution and check the HTTP task's output in the execution details to confirm the API returned a valid result.
 :::
 
 <Tabs groupId="workflow-method">
