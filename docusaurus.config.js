@@ -152,7 +152,7 @@ const config = {
           {
             to: "/content/quickstarts",
             position: "left",
-            label: "Getting Started",
+            label: "Quickstarts",
           },
           {
             to: "/content/category/sdks",
@@ -160,9 +160,14 @@ const config = {
             label: "SDKs",
           },
           {
+            to: "/content/ai-orchestration",
+            position: "left",
+            label: "AI Orchestration",
+          },
+          {
             to: "/content/category/reference-docs",
             position: "left",
-            label: "Task Reference",
+            label: "Task Catalog",
           },
           {
             to: "/content/category/ref-docs/api",
