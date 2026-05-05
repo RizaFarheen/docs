@@ -352,3 +352,13 @@ Starts a new workflow instance.
 | actions. start_workflow. **idempotencyStrategy** | The idempotency strategy for handling duplicate requests. Supported values:<ul><li>`RETURN_EXISTING`: Return the `workflowId` of the workflow instance with the same idempotency key.</li> <li>`FAIL`: Start a new workflow instance only if there are no workflow executions with the same idempotency key.</li> <li>`FAIL_ON_RUNNING`: Start a new workflow instance only if there are no RUNNING or PAUSED workflows with the same idempotency key. Completed workflows can run again.</li></ul> | Required if `idempotencyKey` is used. | 
 | actions. start_workflow. **input** | The input data to be passed to the new workflow. Can be string, number, boolean, null, or object/array. | Optional. | 
 | actions. start_workflow. **taskToDomain** | A mapping of task reference names to domain-specific values to [route the task to defined workers](https://orkes.io/content/developer-guides/task-to-domain). | Optional. | 
+
+**Ordering behavior with Kafka**
+
+Kafka guarantees message ordering within a partition. However, when an event handler triggers a `start_workflow` action, workflow creation is processed concurrently; meaning two messages from the same partition may result in workflows starting in a different order than the messages arrived.
+
+If ordering matters for your use case:
+
+- Use a consistent partition key for messages that must be processed in order, so they land on the same partition.
+- Use `idempotencyKey` on the `start_workflow` action to prevent duplicate workflows from being created if a message is redelivered.
+- Handle ordering inside the workflow; pass a sequence number or timestamp in the event payload and use it within the workflow to detect and respond to out-of-order execution.
