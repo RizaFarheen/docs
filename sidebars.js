@@ -947,22 +947,6 @@ const sidebars = {
         },
         {
             type: 'category',
-            label: 'Orkes Templates',
-            link: {
-                type: 'generated-index',
-                title: 'Orkes Templates',
-                slug: '/category/templates',
-                description: 'Explore ready-to-use workflow templates for common orchestration use cases.',
-            },
-            className: 'leftMenuHeader',
-            items: [
-                'templates/claims-workflow',
-                'templates/agentic-research',
-                'templates/availability-monitoring-for-http-endpoints',
-            ],
-        },
-        {
-            type: 'category',
             label: 'Tutorials',
             link: {
                 type: 'generated-index',
@@ -1002,6 +986,7 @@ const sidebars = {
                             id: 'tutorials/api-processing-usps-example',
                             label: 'API Orchestration',
                         },
+                        'tutorials/availability-monitoring-for-http-endpoints',
                         'tutorials/keep-worker-running-until-condition-true',
                         'tutorials/rotating-secrets-that-expire',
                     ]
