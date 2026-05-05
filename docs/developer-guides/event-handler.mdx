@@ -89,6 +89,34 @@ The following expressions can be used in **condition** with the indicated result
 | $.version > 10 | false | 
 | $.metadata.length == 300 | true | 
 
+### Referencing payload fields
+
+The variable substitution syntax `${fieldName}` lets you pass values from the incoming message payload into your action parameters. Fields are referenced by their key name; nested fields use dot notation.
+
+For example, given this message payload:
+
+```json
+{
+  "workflowId": "4c87e4f6-06b7-11f1-8cfa-e2ee94ec02d4",
+  "waitTaskRefName": "wait_for_lambda_ref",
+  "updateTask": true,
+  "data": {
+    "field_1": "value_1",
+    "field_2": "value_2"
+  }
+}
+```
+
+The following references resolve as shown:
+
+| Reference | Resolved value | 
+| --------- | -------------- |
+| ${workflowId} | 4c87e4f6-06b7-11f1-8cfa-e2ee94ec02d4 | 
+| ${waitTaskRefName} | wait_for_lambda_ref | 
+| ${data.field_1} | value_1 | 
+
+The same fields are accessible in the `condition` expression using `$.fieldName` syntax (for example, `$.updateTask == true`).
+
 ## Configuring actions 
 
 Actions are executed only after the `condition` evaluates to `true`. Multiple actions can be triggered based on the events received. Below are the actions and their configuration details. 
