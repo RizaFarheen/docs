@@ -8,12 +8,11 @@ hide_table_of_contents: true
 import {
   AccordionSection,
   BottomCtaSection,
+  ConceptsSection,
   FirstSection,
   LanguagesSection,
   NewToConductorSection,
   StepBoxesSection,
-  UseCasesSection,
-  VideoSection,
   MoreResourcesSection,
 } from "../src/components/_Sections";
 
@@ -21,42 +20,42 @@ import {
 
 <main className={`mainContainer container`}>
 <NewToConductorSection
-  title="Build AI Agents and Workflows: Scale With Confidence."
+  title="Build AI Agents and Workflows: Scale With Confidence"
   description={
     <div>
-      Orkes Conductor is the battle-tested orchestration platform rooted in open source; with built-in reliability, observability, and control.
-      <br/><br/>
-      Write workers in any language, define your workflows, and let Conductor handle durable execution at scale.
+      Orkes Conductor is the battle-tested orchestration platform rooted in open-source used to build workflows and AI agents that survive failures. Write workers in any language, define your logic in code or JSON, and get built-in durable execution, observability, and control at any scale.
     </div>
   }
   />
+
+## Where do you want to start?
+
 <StepBoxesSection
   steps={[
     {
-      title: "Getting Started",
+      title: "New to Conductor?",
       description:
-        "Learn the fundamentals of Orkes Conductor. Set up your environment and build your first workflow. Get up and running in minutes.",
+        "Install the SDK, connect to your cluster, and run your first workflow. Our quickstarts walk you through the core concepts step by step.",
       to: "/content/quickstarts",
     },
     {
-      title: "AI Orchestration",
+      title: "Building something?",
       description:
-        "Explore Orkes Conductor’s AI capabilities. Use LLM-powered tasks to design AI-powered and agentic workflows.",
-      to: "/ai-orchestration ",
+        "Jump straight to SDK docs, API reference, or task type definitions. Everything you need to build and ship a production workflow.",
+      to: "/content/category/sdks",
     },
     {
-      title: "Gateway",
+      title: "Exploring AI workflows?",
       description:
-        "Expose workflows as APIs or MCP tools using the Orkes Conductor Gateway.",
-      to: "/developer-guides/mcp-api-gateway",
+        "Use LLM tasks, agentic patterns, and MCP integrations to build AI agents that are reliable, observable, and easy to debug.",
+      to: "/ai-orchestration",
     },
   ]}
 />
 
   <LanguagesSection />
+  <ConceptsSection />
   <AccordionSection />
-  <UseCasesSection />
-  {/* <VideoSection /> */}
   <MoreResourcesSection />
   <BottomCtaSection />
 </main>

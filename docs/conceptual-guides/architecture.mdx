@@ -15,7 +15,7 @@ Before you read this article, you should understand:
 
 <p align="center"><img src="/content/img/conductor-architecture.jpg" alt="Conductor architecture" width="90%" height="auto" style={{paddingBottom: 10, paddingTop: 10}} /></p>
 
-In Conductor, a workflow contains tasks in a defined order. You can trigger workflows by code, an API call, a cron schedule, webhooks, or external eventing systems such as AWS SQS and Kafka.
+In Conductor, a workflow contains tasks in a defined order. You can trigger workflows by code, an API call, a cron schedule, webhooks, or external eventing systems such as AWS SQS and Kafka. The FIFO guarantee applies to task execution within a running workflow. When workflows are triggered by external event systems like Kafka or SQS, ordering depends on how those systems deliver messages and is not covered by Conductor's internal task queue ordering.
 
 In Conductor, workflows are executed on a worker-task queue architecture, where each task type (HTTP, Event, Wait, and so on) has its own dedicated task queue. The key components of Conductor’s core orchestration engine include:
 

@@ -161,6 +161,14 @@ const accordionData = [
 
 const moreResoucesData = [
   {
+    title: "Changelog",
+    description:
+      "See what's new in Orkes Conductor: features, enhancements, and product updates.",
+    logo: "/content/img/svg/more-resources/changelog.svg",
+    url: "https://www.orkes.io/changelog",
+    ctaLabel: "View changelog",
+  },
+  {
     title: "Academy",
     description:
       "Learn workflow orchestration with hands-on labs, structured paths, and certification from Orkes.",
@@ -175,14 +183,6 @@ const moreResoucesData = [
     logo: "/content/img/svg/more-resources/blogs.svg",
     url: "https://orkes.io/blog/",
     ctaLabel: "Read blogs",
-  },
-  {
-    title: "Developer Events",
-    description:
-      "Upcoming webinars, workshops, and developer events from Orkes.",
-    logo: "/content/img/svg/more-resources/dev-events.svg",
-    url: "https://orkes.io/events/",
-    ctaLabel: "Check upcoming events",
   },
 ];
 export const StepBoxesSection = ({ steps = [] }) => (
@@ -284,40 +284,45 @@ const IconHeader = ({ icon, header }) => (
 
 export const SDKList = ({}) => (
   <div className={styles.sdklist}>
-    <a className={"aClass"} href={"/content/sdks/java"}>
+    <a className={styles.sdkItem} href={"/content/sdks/java"}>
       <img
         src="/content/img/java.svg"
-        style={{ height: 75, width: 75, margin: 5 }}
+        style={{ height: 60, width: 60, margin: 5 }}
         alt="Java SDK"
       />
+      <span className={styles.sdkLabel}>Java</span>
     </a>
-    <a className={"aClass"} href={"/content/sdks/python"}>
+    <a className={styles.sdkItem} href={"/content/sdks/python"}>
       <img
         src="/content/img/Python_logo.svg"
-        style={{ height: 75, width: 75, margin: 5 }}
+        style={{ height: 60, width: 60, margin: 5 }}
         alt="Python SDK"
       />
+      <span className={styles.sdkLabel}>Python</span>
     </a>
-    <a className={"aClass"} href={"/content/sdks/csharp"}>
-      <img
-        src="/content/img/csharp.png"
-        style={{ height: 75, width: 75, margin: 5 }}
-        alt="C# SDK"
-      />
-    </a>
-    <a className={"aClass"} href={"/content/sdks/javascript"}>
+    <a className={styles.sdkItem} href={"/content/sdks/javascript"}>
       <img
         src="/content/img/JavaScript_logo_2.svg"
-        style={{ height: 75, width: 75, margin: 5 }}
+        style={{ height: 60, width: 60, margin: 5 }}
         alt="JavaScript SDK"
       />
+      <span className={styles.sdkLabel}>JavaScript</span>
     </a>
-    <a className={"aClass"} href={"/content/sdks/golang"}>
+    <a className={styles.sdkItem} href={"/content/sdks/golang"}>
       <img
         src="/content/img/Go_Logo_Blue.svg"
-        style={{ height: 75, width: 75, margin: 5 }}
+        style={{ height: 60, width: 60, margin: 5 }}
         alt="Go SDK"
       />
+      <span className={styles.sdkLabel}>Go</span>
+    </a>
+    <a className={styles.sdkItem} href={"/content/sdks/csharp"}>
+      <img
+        src="/content/img/csharp.png"
+        style={{ height: 60, width: 60, margin: 5 }}
+        alt="C# SDK"
+      />
+      <span className={styles.sdkLabel}>C#</span>
     </a>
   </div>
 );
@@ -400,8 +405,11 @@ export const LanguagesSection = ({}) => (
     <InfoPaperNoTitle
       children={
         <div>
-          <h2>Works in your language, with your framework</h2>
+          <h2>Works in your language</h2>
           <SDKList />
+          <div className={styles.sdkViewAll}>
+            <Link to="/content/category/sdks">View all SDKs →</Link>
+          </div>
         </div>
       }
     />
@@ -455,6 +463,38 @@ export const AccordionSection = ({}) => (
     <h2>What can Orkes Conductor do?</h2>
 
     <AccordionWithImg data={accordionData} />
+  </div>
+);
+
+const conceptsData = [
+  {
+    title: "Gateway",
+    description: "Expose workflows as REST APIs or MCP tools with no extra infrastructure required.",
+    url: "/developer-guides/mcp-api-gateway",
+  },
+  {
+    title: "Human in the loop",
+    description: "Pause workflows for manual review, approval, or input, then continue once a human completes the task.",
+    url: "/developer-guides/orchestrating-human-tasks",
+  },
+  {
+    title: "Event-driven workflows",
+    description: "Connect workflows to external systems using event handlers, webhooks, and CDC for event-driven automation.",
+    url: "/eventing",
+  },
+];
+
+export const ConceptsSection = () => (
+  <div className="padding-vert--md">
+    <h2>Understand the platform</h2>
+    <div className={styles.conceptsSection}>
+      {conceptsData.map((item, index) => (
+        <Link key={index} to={item.url} className={styles.conceptsCard}>
+          <h3>{item.title}</h3>
+          <p>{item.description}</p>
+        </Link>
+      ))}
+    </div>
   </div>
 );
 

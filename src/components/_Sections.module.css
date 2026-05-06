@@ -39,6 +39,26 @@
   display: flex;
   justify-content: space-around;
 }
+
+.sdkItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+}
+
+.sdkLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-top: 4px;
+  color: var(--ifm-font-color-base);
+}
+
+.sdkViewAll {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
 .videoSection {
   display: flex;
   flex-wrap: wrap;
@@ -85,6 +105,39 @@
 .useCaseTitle {
   padding-top: 10px;
   font-weight: 600;
+}
+
+.conceptsSection {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.conceptsCard {
+  border: 1px solid #c8c8c8;
+  border-radius: 12px;
+  padding: 20px 24px;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.conceptsCard:hover {
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  text-decoration: none;
+  color: inherit;
+}
+
+.conceptsCard h3 {
+  margin-bottom: 8px;
+  font-size: 1rem;
+}
+
+.conceptsCard p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--ifm-color-secondary-darkest);
 }
 
 .moreResourcesSection {

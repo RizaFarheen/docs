@@ -1,0 +1,44 @@
+---
+sidebar_position: 9
+slug: "/reference-docs/api/integrations/delete-integration-resource"
+description: "Learn how to delete an integration resource from an integration provider."
+---
+
+# Delete Integration Resource
+
+**Endpoint**: `DELETE /api/integrations/provider/{name}/integration/{integration_name}`
+
+Deletes an integration resource from Conductor cluster. Integration resources apply to AI/LLMs, vector databases, and RDBMS, where the resources are models, indexes, and tables respectively.
+
+## Path Parameters
+
+| Parameter | Description                                      | Type   | Required/ Optional |
+| --------- | ------------------------------------------------ | ------ | ------------------ |
+| name | The name of the integration resource to delete. This is the integration name, not the provider name. For example, if you have created an OpenAI integration named `openAI`, use `openAI`. | string | Required. | 
+| integration_name | The name of the specific resource to delete, which can be:<ul><li>the model name for AI/LLMs</li><li>the index name for databases</li><li>the table name for RDBMS</li></ul> | string | Required. | 
+
+## Response
+
+Returns 200 OK, indicating that the resource has been deleted.
+
+## Examples
+
+<details>
+<summary>Delete an integration resource</summary>
+
+The following request deletes the `gpt-4o` model resource from the `openAI` integration.
+
+**Request**
+
+```shell
+curl -X 'DELETE' \
+  'https://<YOUR-SERVER-URL>/api/integrations/provider/openAI/integration/gpt-4o' \
+  -H 'accept: */*' \
+  -H 'X-Authorization: <TOKEN>'
+```
+
+**Response**
+
+Returns 200 OK, indicating that the resource has been deleted.
+
+</details>

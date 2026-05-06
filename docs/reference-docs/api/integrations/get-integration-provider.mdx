@@ -1,0 +1,60 @@
+---
+sidebar_position: 2
+slug: "/reference-docs/api/integrations/get-integration-provider"
+description: "Learn how to retrieve an integration provider."
+---
+
+# Get Integration Provider
+
+**Endpoint**: `GET /api/integrations/provider/{name}`
+
+Retrieves an integration provider from Conductor cluster.
+
+## Path parameters
+
+| Parameter | Description                                      | Type   | Required/ Optional |
+| --------- | ------------------------------------------------ | ------ | ------------------ |
+| name | The name of the integration to retrieve. | string | Required. | 
+
+## Response
+
+Returns the integration provider object with its configuration details, enabled status, and associated model count.
+
+## Examples
+
+<details>
+<summary>Get an integration provider</summary>
+
+**Request**
+
+```shell
+curl -X 'GET' \
+  'https://<YOUR-SERVER-URL/api/integrations/provider/openAI' \
+  -H 'accept: application/json' \
+  -H 'X-Authorization: <TOKEN>'
+```
+
+**Response**
+
+```json
+{
+  "createTime": 1764326634134,
+  "updateTime": 1764326634134,
+  "createdBy": "john.doe@acme.com",
+  "updatedBy": "john.doe@acme.com",
+  "name": "openAI",
+  "type": "openai",
+  "description": "Test",
+  "category": "AI_MODEL",
+  "configuration": {
+    "api_key": "<API-KEY>",
+    "endpoint": "https://api.openai.com",
+    "organizationId": ""
+  },
+  "enabled": true,
+  "tags": [],
+  "modelsCount": 4
+}
+```
+
+</details>
