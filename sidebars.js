@@ -709,6 +709,30 @@ const sidebars = {
                         },
                         {
                             type: 'category',
+                            label: 'CRM',
+                            link: {
+                                type: 'generated-index',
+                                title: 'CRM',
+                                slug: '/category/integrations/crm',
+                                description: 'Learn how to connect CRM platforms to manage and automate customer relationships through workflows.',
+                            },
+                            items: [
+                                {
+                                    type: 'category',
+                                    label: 'HubSpot',
+                                    link: { type: 'doc', id: 'integrations/connected-apps/crm/hubspot' },
+                                    items: [
+                                        {
+                                            type: 'doc',
+                                            id: 'integrations/connected-apps/crm/hubspot-operations',
+                                            label: 'HubSpot Operations Reference',
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                        {
+                            type: 'category',
                             label: 'CMS',
                             link: {
                                 type: 'generated-index',
