@@ -326,7 +326,7 @@ Retrieves a deal by ID from HubSpot.
 
 | Parameter | Description | Type | Required/Optional |
 | --------- | ----------- | ---- | ----------------- |
-| Deal Id | The unique ID of the deal to retrieve. To get this value, use [Search Deals] or [List Deals] and copy the `id` from the response. <br/>You can also find it in the HubSpot URL when viewing a deal record. For example, in `app.hubspot.com/contacts/148480743/record/0-3/502507770065`, the deal ID is `502507770065`. | string | Required. | 
+| Deal Id | The unique ID of the deal to retrieve. To get this value, use [Search Deals](/content/integrations/hubspot-operations#search-deals) or [List Deals](/content/integrations/hubspot-operations#list-deals) and copy the `id` from the response. <br/>You can also find it in the HubSpot URL when viewing a deal record. For example, in `app.hubspot.com/contacts/148480743/record/0-3/502507770065`, the deal ID is `502507770065`. | string | Required. | 
 
 </TabItem>
 <TabItem value="output" label="Output Parameters">
@@ -386,7 +386,7 @@ Update an existing deal in HubSpot.
 
 | Parameter | Description | Type | Required/Optional |
 | --------- | ----------- | ---- | ----------------- |
-| Deal Id | The unique ID of the deal to update. To get this value, use [Search Deals] or [List Deals] and copy the `id` from the response.<br/>You can also find it in the HubSpot URL when viewing a deal record. For example, in `app.hubspot.com/contacts/148480743/record/0-3/502507770065`, the deal ID is `502507770065`. | string | Required. | 
+| Deal Id | The unique ID of the deal to update. To get this value, use [Search Deals](/content/integrations/hubspot-operations#search-deals) or [List Deals](/content/integrations/hubspot-operations#list-deals) and copy the `id` from the response.<br/>You can also find it in the HubSpot URL when viewing a deal record. For example, in `app.hubspot.com/contacts/148480743/record/0-3/502507770065`, the deal ID is `502507770065`. | string | Required. | 
 | Properties | The deal properties to update, provided as a JSON object. For example, `{"dealname": "New Deal Name", "amount": "10000"}`. | JSON map | Required. | 
 
 </TabItem>
@@ -406,7 +406,7 @@ Delete a deal from HubSpot.
 
 | Parameter | Description | Type | Required/Optional |
 | --------- | ----------- | ---- | ----------------- |
-| Deal Id | The unique ID of the deal to delete. To get this value, use [Search Deals] or [List Deals] and copy the `id` from the response.<br/>You can also find it in the HubSpot URL when viewing a deal record. For example, in `app.hubspot.com/contacts/148480743/record/0-3/502507770065`, the deal ID is `502507770065`. | string | Required. | 
+| Deal Id | The unique ID of the deal to delete. To get this value, use [Search Deals](/content/integrations/hubspot-operations#search-deals) or [List Deals](/content/integrations/hubspot-operations#list-deals) and copy the `id` from the response.<br/>You can also find it in the HubSpot URL when viewing a deal record. For example, in `app.hubspot.com/contacts/148480743/record/0-3/502507770065`, the deal ID is `502507770065`. | string | Required. | 
 
 </TabItem>
 <TabItem value="output" label="Output Parameters">
@@ -426,9 +426,9 @@ Create a new ticket in HubSpot.
 | Parameter | Description | Type | Required/Optional |
 | --------- | ----------- | ---- | ----------------- |
 | Subject | The subject or name of the ticket. | string | Required. | 
-| Pipeline Stage | The stage ID of the ticket in the pipeline. Use [Get Ticket Pipelines] to retrieve the valid stage IDs for your account. Defaults to the default pipeline. | string | Required. | 
+| Pipeline Stage | The stage ID of the ticket in the pipeline. Use [Get Ticket Pipelines](/content/integrations/hubspot-operations#get-ticket-pipelines) to retrieve the valid stage IDs for your account. Defaults to the default pipeline. | string | Required. | 
 | Content | The description or content of the ticket. | string | Optional. | 
-| Pipeline | The pipeline ID the ticket belongs to. Use [Get Ticket Pipelines] to retrieve the available pipeline IDs. Defaults to the `default` pipeline. | string | Optional. | 
+| Pipeline | The pipeline ID the ticket belongs to. Use [Get Ticket Pipelines](/content/integrations/hubspot-operations#get-ticket-pipelines) to retrieve the available pipeline IDs. Defaults to the `default` pipeline. | string | Optional. | 
 
 </TabItem>
 <TabItem value="output" label="Output Parameters">
@@ -447,7 +447,7 @@ Retrieves a ticket by ID from HubSpot.
 
 | Parameter | Description | Type | Required/Optional |
 | --------- | ----------- | ---- | ----------------- |
-| Ticket Id | The unique ID of the ticket to retrieve. To get this value, use [List Tickets] and copy the `id` from the response.<br/>You can also find it in the HubSpot URL when viewing a ticket record. For example, in `app.hubspot.com/contacts/148480743/record/0-5/417248509143`, the ticket ID is `417248509143`. | string | Required. |
+| Ticket Id | The unique ID of the ticket to retrieve. To get this value, use [List Tickets](/content/integrations/hubspot-operations#list-tickets) and copy the `id` from the response.<br/>You can also find it in the HubSpot URL when viewing a ticket record. For example, in `app.hubspot.com/contacts/148480743/record/0-5/417248509143`, the ticket ID is `417248509143`. | string | Required. |
 
 </TabItem>
 <TabItem value="output" label="Output Parameters">
@@ -487,7 +487,7 @@ Updates an existing ticket in HubSpot.
 
 | Parameter | Description | Type | Required/Optional |
 | --------- | ----------- | ---- | ----------------- |
-| Ticket Id | The unique ID of the ticket to update. To get this value, use [List Tickets] and copy the `id` from the response.<br/>You can also find it in the HubSpot URL when viewing a ticket record. For example, in `app.hubspot.com/contacts/148480743/record/0-5/417248509143`, the ticket ID is `417248509143`. | string | Required. |
+| Ticket Id | The unique ID of the ticket to update. To get this value, use [List Tickets](/content/integrations/hubspot-operations#list-tickets) and copy the `id` from the response.<br/>You can also find it in the HubSpot URL when viewing a ticket record. For example, in `app.hubspot.com/contacts/148480743/record/0-5/417248509143`, the ticket ID is `417248509143`. | string | Required. |
 | Properties | The ticket properties to update, provided as a JSON object. For example, `{"subject": "Updated Ticket", "hs_pipeline_stage": "2"}`. | JSON map | Required. | 
 
 </TabItem>
@@ -507,7 +507,7 @@ Delete a ticket from HubSpot.
 
 | Parameter | Description | Type | Required/Optional |
 | --------- | ----------- | ---- | ----------------- |
-| Ticket Id | The unique ID of the ticket to delete. To get this value, use [List Tickets] and copy the `id` from the response.<br/>You can also find it in the HubSpot URL when viewing a ticket record. For example, in `app.hubspot.com/contacts/148480743/record/0-5/417248509143`, the ticket ID is `417248509143`. | string | Required. | 
+| Ticket Id | The unique ID of the ticket to delete. To get this value, use [List Tickets](/content/integrations/hubspot-operations#list-tickets) and copy the `id` from the response.<br/>You can also find it in the HubSpot URL when viewing a ticket record. For example, in `app.hubspot.com/contacts/148480743/record/0-5/417248509143`, the ticket ID is `417248509143`. | string | Required. | 
 
 </TabItem>
 <TabItem value="output" label="Output Parameters">
@@ -546,7 +546,7 @@ Retrieves a note by ID from HubSpot.
 
 | Parameter | Description | Type | Required/Optional |
 | --------- | ----------- | ---- | ----------------- |
-| Note ID | The unique ID of the note to retrieve. To get this value, use [List Notes] and copy the `id` from the response. | string | Required. | 
+| Note ID | The unique ID of the note to retrieve. To get this value, use [List Notes](/content/integrations/hubspot-operations#list-notes) and copy the `id` from the response. | string | Required. | 
 
 </TabItem>
 <TabItem value="output" label="Output Parameters">
@@ -586,7 +586,7 @@ Delete a note from HubSpot.
 
 | Parameter | Description | Type | Required/Optional |
 | --------- | ----------- | ---- | ----------------- |
-| Note ID | The unique ID of the note to delete. To get this value, use [List Notes] and copy the `id` from the response. | string | Required. | 
+| Note ID | The unique ID of the note to delete. To get this value, use [List Notes](/content/integrations/hubspot-operations#list-notes) and copy the `id` from the response. | string | Required. | 
 
 </TabItem>
 <TabItem value="output" label="Output Parameters">
